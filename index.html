@@ -67,6 +67,135 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* ============ Interactive widgets ============ */
+
+  .widget {
+    background: var(--cream-deep);
+    border-left: 3px solid var(--bordeaux);
+    padding: 16px 18px;
+    margin: 22px 0;
+    font-family: var(--sans);
+    font-size: 13px;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .widget h4.w-title {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--bordeaux);
+    margin: 0 0 4px;
+  }
+  .widget p.w-desc {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0 0 12px;
+    max-width: 56ch;
+    color: var(--ink);
+  }
+  .widget .w-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 10px 0;
+    align-items: center;
+  }
+  .widget .w-ctrl {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 140px;
+  }
+  .widget .w-ctrl label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .widget .w-ctrl label .v {
+    font-family: var(--mono);
+    color: var(--bordeaux);
+    font-weight: 600;
+    margin-left: 6px;
+  }
+  .widget input[type=range] {
+    width: 100%;
+    accent-color: var(--bordeaux);
+    height: 4px;
+  }
+  .widget select, .widget button {
+    font-family: var(--sans);
+    font-size: 12px;
+    padding: 6px 10px;
+    border: 1px solid var(--ink);
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .widget .w-readout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 18px;
+    margin-top: 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+  }
+  .widget .w-readout .k { color: var(--ink-soft); }
+  .widget .w-readout .v { font-family: var(--mono); color: var(--bordeaux); font-weight: 600; text-align: right; }
+  .widget svg { background: var(--cream); border: 1px solid var(--rule); display: block; max-width: 100%; height: auto; }
+  .widget .src-pill {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 9px;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    background: var(--ink);
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    border-radius: 2px;
+  }
+  .widget .src-pill::before { content: "↗ "; opacity: 0.7; }
+  .widget .src-pill:hover { background: var(--bordeaux); }
+
+  /* inline source pill — appears next to equations and key sections */
+  a.code-link {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--bordeaux);
+    text-decoration: none;
+    border: 1px solid var(--bordeaux);
+    padding: 1px 6px;
+    margin-left: 8px;
+    border-radius: 2px;
+    letter-spacing: 0.03em;
+    vertical-align: 2px;
+    background: transparent;
+    transition: background 100ms;
+  }
+  a.code-link:hover { background: var(--bordeaux); color: var(--cream); }
+  a.code-link::before { content: "src↗ "; opacity: 0.75; font-size: 10px; }
+
+  /* repository banner in masthead */
+  .repo-pill {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 6px 12px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    background: var(--ink);
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    border-radius: 2px;
+  }
+  .repo-pill:hover { background: var(--bordeaux); }
+  .repo-pill::before { content: "↗ "; opacity: 0.7; }
+
   /* ============ Masthead ============ */
 
   .masthead {
@@ -523,6 +652,9 @@
   <p class="subtitle">Method development, MRM optimization, and validation of solid-phase microextraction Arrow headspace GC-MS/MS for the aroma-active volatiles of Cabernet Sauvignon.</p>
   <p class="byline">A dissertation submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy. <br>
   <strong>Department of Viticulture and Enology</strong> · College of Agricultural and Environmental Sciences.</p>
+  <a class="repo-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation" rel="noopener">github.com/RayyanZahid/wine-spme-dissertation</a>
+  &nbsp; <a class="repo-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation/tree/main/code" rel="noopener">code/</a>
+  &nbsp; <a class="repo-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/MRM/transitions.yaml" rel="noopener">MRM/transitions.yaml</a>
 </header>
 
 <nav class="toc" aria-label="Table of contents">
@@ -631,12 +763,67 @@
   <p>Pre-equilibrium sampling obeys a first-order approach to equilibrium with characteristic time constant <em>&tau;</em>, where the 95 % equilibrium time <em>t<sub>eq</sub></em> ≈ 3<em>&tau;</em>:</p>
 
   <p class="eqn">n(t) = n<sub>f</sub><sup>eq</sup> (1 &minus; e<sup>&minus;t/&tau;</sup>) <span class="num">(3.2)</span></p>
+  <p style="margin-top:-10px"><a class="code-link" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/spme_method_dev.py#L321" rel="noopener">spme_method_dev.py · fit_isotherm</a></p>
 
   <p>For SPME Arrow on red wine at 50 &deg;C with 250 rpm agitation, <em>t<sub>eq</sub></em> is approximately 15 min for low-molecular-weight esters, 25 to 30 min for methoxypyrazines and monoterpenes, and 45 to 60 min for high-molecular-weight C13 norisoprenoids and oak phenolics. Pre-equilibrium sampling is feasible for high-throughput screening but commits the method to constant sampling time and constant matrix conditions; any deviation propagates non-linearly to the reported concentration.</p>
+
+  <!-- ======== Interactive widget: extraction-kinetics explorer ======== -->
+  <div class="widget" id="iso-widget" role="region" aria-label="Extraction kinetics interactive explorer">
+    <h4 class="w-title">Interactive — extraction kinetics</h4>
+    <p class="w-desc">Pawliszyn first-order isotherm with the working method&rsquo;s 30 min sampling line. Pick an analyte from Table 5.2 to see what fraction of equilibrium that compound has reached at the working sampling time. The decision the dissertation makes (commit to constant 30 min) is encoded in this curve.</p>
+    <div class="w-controls">
+      <div class="w-ctrl" style="min-width:200px">
+        <label>Analyte (&tau; from Table 5.2)</label>
+        <select id="iso-analyte">
+          <option value="5.4|IBMP">IBMP (&tau; = 5.4 min)</option>
+          <option value="4.8|Ethyl octanoate">Ethyl octanoate (&tau; = 4.8 min)</option>
+          <option value="6.2|TCA">TCA (&tau; = 6.2 min)</option>
+          <option value="7.5|Linalool">Linalool (&tau; = 7.5 min)</option>
+          <option value="8.9|4-ethylguaiacol">4-ethylguaiacol (&tau; = 8.9 min)</option>
+          <option value="12.1|&beta;-damascenone">&beta;-damascenone (&tau; = 12.1 min)</option>
+          <option value="14.3|Ethyl decanoate">Ethyl decanoate (&tau; = 14.3 min)</option>
+          <option value="18.7|TDN">TDN (&tau; = 18.7 min)</option>
+        </select>
+      </div>
+      <div class="w-ctrl">
+        <label>Custom &tau; <span class="v" id="iso-tau-v">5.4</span> min</label>
+        <input type="range" id="iso-tau" min="2" max="30" step="0.1" value="5.4">
+      </div>
+    </div>
+    <svg viewBox="0 0 360 220" id="iso-svg" role="img" aria-label="Isotherm curve plot">
+      <g font-family="Inter, sans-serif" font-size="9" fill="#3A3631">
+        <line x1="40" y1="190" x2="350" y2="190" stroke="#14110D" stroke-width="0.7"/>
+        <line x1="40" y1="20"  x2="40"  y2="190" stroke="#14110D" stroke-width="0.7"/>
+        <text x="195" y="212" text-anchor="middle" font-size="10">extraction time (min)</text>
+        <text x="14" y="105" transform="rotate(-90 14 105)" text-anchor="middle" font-size="10">extracted fraction</text>
+        <text x="40"  y="205">0</text>
+        <text x="195" y="205" text-anchor="middle">45</text>
+        <text x="350" y="205" text-anchor="end">90</text>
+        <text x="36"  y="194" text-anchor="end">0</text>
+        <text x="36"  y="105" text-anchor="end">0.5</text>
+        <text x="36"  y="23"  text-anchor="end">1.0</text>
+      </g>
+      <!-- 30 min working line -->
+      <line x1="143" y1="20" x2="143" y2="190" stroke="#5C0F1F" stroke-width="0.7" stroke-dasharray="3,3"/>
+      <text x="146" y="32" font-family="Inter" font-size="9" fill="#5C0F1F">30 min · working</text>
+      <!-- the curve -->
+      <path id="iso-curve" d="" fill="none" stroke="#4A5D3B" stroke-width="2.2"/>
+      <!-- intercept marker -->
+      <circle id="iso-mark" cx="143" cy="190" r="4" fill="#5C0F1F"/>
+    </svg>
+    <div class="w-readout">
+      <span class="k">&tau; (time constant)</span><span class="v" id="iso-tau-out">5.4 min</span>
+      <span class="k">t<sub>eq</sub> = 3&tau; (95% equilibrium)</span><span class="v" id="iso-teq">16.2 min</span>
+      <span class="k">Fraction extracted at 30 min</span><span class="v" id="iso-frac30">99.6 %</span>
+      <span class="k">Decision</span><span class="v" id="iso-decision">equilibrium ✓</span>
+    </div>
+    <a class="src-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/spme_method_dev.py#L321" rel="noopener">code/spme_method_dev.py · fit_isotherm</a>
+  </div>
 
   <h4>3.2.1 Salting-out</h4>
   <p>Addition of NaCl reduces aqueous-phase activity coefficients and drives volatile analytes into the headspace, increasing <em>K<sub>hs</sub></em>. The Setschenow constant <em>k<sub>S</sub></em> quantifies the effect:</p>
   <p class="eqn">log <em>K</em><sub>app</sub> = log <em>K</em><sub>0</sub> + <em>k<sub>S</sub></em> [NaCl] <span class="num">(3.3)</span></p>
+  <p style="margin-top:-10px"><a class="code-link" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/spme_method_dev.py" rel="noopener">spme_method_dev.py · salting_out_fit</a></p>
   <p>with <em>k<sub>S</sub></em> typically 0.1 to 0.4 per molar for wine volatiles. Wine ethanol acts in the opposite direction (salting-in), reducing headspace partition; sample dilution with water to lower the ethanol fraction is a documented improvement at the cost of additional sample-prep complexity.</p>
 
   <h3>3.3 SPME Arrow geometry and sorbent choices</h3>
@@ -672,6 +859,7 @@
   <p>Only ions whose (<em>a</em>, <em>q</em>) coordinates fall inside the bounded stable region of the Mathieu diagram survive the filter. The first stability region apex sits at approximately (<em>a</em> ≈ 0.237, <em>q</em> ≈ 0.706); the mass scan line is a straight line through the origin in (<em>a</em>, <em>q</em>) space with slope <em>U</em>/<em>V</em> = constant. Setting <em>U</em> = 0 collapses to the q-axis &mdash; the RF-only ion-guide mode used in q2, where the wide stable region passes essentially all ions above a low-mass cutoff.</p>
   <p>Collision-induced dissociation (CID) in q2 converts ion kinetic energy to internal energy through low-energy collisions with N<sub>2</sub>. The center-of-mass energy is:</p>
   <p class="eqn">E<sub>CM</sub> = E<sub>LAB</sub> &middot; M<sub>gas</sub> / (M<sub>gas</sub> + M<sub>ion</sub>) <span class="num">(3.6)</span></p>
+  <p style="margin-top:-10px"><a class="code-link" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/mrm_optimizer.py#L325" rel="noopener">mrm_optimizer.py · center_of_mass_energy</a></p>
   <p>so heavier precursors require higher laboratory-frame collision energy to achieve the same center-of-mass energy as a smaller analyte. The dissertation method uses lab-frame CE per transition; the Mathieu equations are the underlying physics, but the method-development practice is per-transition empirical CE ramp from 5 to 40 eV in 2.5 eV steps with selection of the CE that maximizes diagnostic product-ion abundance.</p>
 
   <h4>3.4.2 MRM versus SRM versus full-scan</h4>
@@ -682,7 +870,8 @@
   <p class="eqn">CT = N<sub>concurrent</sub> &times; (D + P) <span class="num">(3.7)</span></p>
   <p>where <em>D</em> is per-transition dwell, <em>P</em> is interscan delay (typically 5 ms), and <em>N<sub>concurrent</sub></em> is the count of transitions active in the window. Solving for dwell given a target points-per-peak (PPP) and peak FWHM:</p>
   <p class="eqn">D<sub>max</sub> = ((FWHM<sub>s</sub> / PPP<sub>target</sub>) &times; 1000 / N<sub>concurrent</sub>) &minus; P <span class="num">(3.8)</span></p>
-  <p>The dissertation method targets PPP ≥ 12, which the developed 37-segment schedule meets across the full 47.3 min runtime; the cycle-time math is implemented in <code>code/mrm_optimizer.py</code> and produced the per-segment dwell allocations in the validated method.</p>
+  <p style="margin-top:-10px"><a class="code-link" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/mrm_optimizer.py#L166" rel="noopener">mrm_optimizer.py · build_segments</a></p>
+  <p>The dissertation method targets PPP ≥ 12, which the developed 37-segment schedule meets across the full 47.3 min runtime; the cycle-time math is implemented in <a href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/mrm_optimizer.py" rel="noopener"><code>code/mrm_optimizer.py</code></a> and produced the per-segment dwell allocations in the validated method. See the interactive segment visualizer in §6.4 to walk each segment of the actual plan.</p>
 
   <h3>3.5 Validation frameworks</h3>
   <p>The primary validation framework adopted in this work is ICH Q2(R2) <em>Validation of Analytical Procedures</em> (2023 revision), with reference to AOAC SMPR Appendix F, EURACHEM &ldquo;Fitness for Purpose&rdquo; (2nd ed., 2014), OIV Annex E, and SANTE/11312/2021 where the wine-volatile context is closer to the multi-residue pesticide MRL framework than the pharmaceutical assay framework. Validation characteristics are specificity, accuracy (trueness via spike recovery and certified reference materials where available), precision (repeatability and intermediate precision), detection limit, quantitation limit, linearity, range, and robustness. A matrix-effect slope-ratio test is added to the ICH minimum, given the documented suppressive effect of wine ethanol and phenolic background on HS-SPME extraction.</p>
@@ -721,7 +910,7 @@
   <p>Four SPME Arrow phases &mdash; PDMS, DVB/PDMS, CWR/PDMS, DVB/CWR/PDMS &mdash; were tested at fixed extraction conditions (50 &deg;C, 30 min, 2 g NaCl in 5 mL pooled Cabernet wine) on a per-sorbent triplicate, with peak-area output normalized to the highest response per analyte. The triple-mode DVB/CWR/PDMS phase carried the highest geometric-mean response across compound classes (1.00 baseline), with DVB/PDMS at 0.78, CWR/PDMS at 0.62, and pure PDMS at 0.41 (PDMS does well for the late-eluting C13 norisoprenoid tail but loses by an order of magnitude on the front-eluting methoxypyrazines and esters). DVB/CWR/PDMS was selected as the method sorbent.</p>
 
   <h3>5.2 Plackett-Burman screening</h3>
-  <p>A 12-run Plackett-Burman screening design was applied to seven extraction factors: extraction temperature (30 to 60 &deg;C), extraction time (15 to 60 min), sodium chloride mass (0.5 to 4 g in 5 mL sample), sample volume (5 to 10 mL in 20 mL vial), ethanol dilution factor (no dilution to 1:5 v/v in water), agitation speed (250 to 500 rpm), and incubation time (5 to 15 min). Pareto effect ranking by Lenth&rsquo;s pseudo-standard-error method identified three significant factors at &alpha; = 0.10: extraction temperature, extraction time, and NaCl mass. Sample volume, agitation, ethanol dilution, and incubation time were not significant and were fixed at the working levels (5 mL sample, 500 rpm agitation, no ethanol dilution, 5 min incubation) for the Box-Behnken phase.</p>
+  <p>A 12-run Plackett-Burman screening design <a class="code-link" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/spme_method_dev.py#L64" rel="noopener">spme_method_dev.py · plackett_burman</a> was applied to seven extraction factors: extraction temperature (30 to 60 &deg;C), extraction time (15 to 60 min), sodium chloride mass (0.5 to 4 g in 5 mL sample), sample volume (5 to 10 mL in 20 mL vial), ethanol dilution factor (no dilution to 1:5 v/v in water), agitation speed (250 to 500 rpm), and incubation time (5 to 15 min). Pareto effect ranking by Lenth&rsquo;s pseudo-standard-error method identified three significant factors at &alpha; = 0.10: extraction temperature, extraction time, and NaCl mass. Sample volume, agitation, ethanol dilution, and incubation time were not significant and were fixed at the working levels (5 mL sample, 500 rpm agitation, no ethanol dilution, 5 min incubation) for the Box-Behnken phase.</p>
 
   <table>
     <caption><strong>Table 5.1</strong> Plackett-Burman screen factor levels and significance ranking (Lenth&rsquo;s method, &alpha; = 0.10).</caption>
@@ -740,14 +929,55 @@
   </table>
 
   <h3>5.3 Box-Behnken optimization</h3>
-  <p>A 15-run Box-Behnken design (3 factors, 3 levels, 3 center-point replicates) was constructed by <code>code/spme_method_dev.py optimize --design bbd --factors 3</code>. Levels were extraction temperature 30, 45, 60 &deg;C; extraction time 15, 37.5, 60 min; NaCl mass 0.5, 2.25, 4 g. Responses were the log-transformed peak areas of representative analytes from each compound class: IBMP (methoxypyrazine); β-damascenone (norisoprenoid); ethyl octanoate (ester); linalool (terpene); 4-ethylguaiacol (volatile phenol); TCA (haloanisole). A full quadratic response-surface model was fit per analyte, then a composite Derringer-Suich desirability with equal weights across analytes was maximized to find the joint optimum.</p>
+  <p>A 15-run Box-Behnken design (3 factors, 3 levels, 3 center-point replicates) was constructed by <a href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/spme_method_dev.py#L94" rel="noopener"><code>spme_method_dev.py optimize --design bbd --factors 3</code></a>. Levels were extraction temperature 30, 45, 60 &deg;C; extraction time 15, 37.5, 60 min; NaCl mass 0.5, 2.25, 4 g. Responses were the log-transformed peak areas of representative analytes from each compound class: IBMP (methoxypyrazine); β-damascenone (norisoprenoid); ethyl octanoate (ester); linalool (terpene); 4-ethylguaiacol (volatile phenol); TCA (haloanisole). A full quadratic response-surface model was fit per analyte, then a composite Derringer-Suich desirability with equal weights across analytes was maximized to find the joint optimum.</p>
 
   <p>The composite-optimum coordinates were extraction temperature 50.2 &deg;C, extraction time 30.4 min, NaCl mass 4.0 g (the high end of the design space &mdash; the salting-out plateau was not reached within the design range and the optimum sits at the design boundary). The temperature optimum is just below the IBMP-artifact ceiling of approximately 60 &deg;C reported by Antalick and colleagues. The time optimum is in the pre-equilibrium regime for the heaviest analytes (TDN, ethyl decanoate) but within 95 % of equilibrium for the methoxypyrazine, ester, and volatile-phenol clusters that dominate the panel.</p>
 
   <p>The fitted quadratic surface for IBMP was:</p>
   <p class="eqn" style="font-size:14px;">log(A<sub>IBMP</sub>) = 5.21 + 0.43 X<sub>1</sub> + 0.31 X<sub>2</sub> + 0.18 X<sub>3</sub> &minus; 0.12 X<sub>1</sub>² &minus; 0.07 X<sub>2</sub>² &minus; 0.03 X<sub>3</sub>² + 0.05 X<sub>1</sub>X<sub>2</sub> <span class="num">(5.1)</span></p>
+  <p style="margin-top:-10px"><a class="code-link" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/spme_method_dev.py#L212" rel="noopener">spme_method_dev.py · fit_quadratic_rsm</a></p>
 
   <p>where <em>X<sub>1</sub></em>, <em>X<sub>2</sub></em>, <em>X<sub>3</sub></em> are the coded (&minus;1, 0, +1) levels of temperature, time, and NaCl. The R² of the full quadratic was 0.962 with adjusted R² 0.911 across the 15 runs; lack-of-fit at the three center-point replicates was not significant (F<sub>2,2</sub> = 1.4, p = 0.42).</p>
+
+  <!-- ======== Interactive widget: response-surface contour explorer ======== -->
+  <div class="widget" id="rsm-widget" role="region" aria-label="Response surface contour explorer">
+    <h4 class="w-title">Interactive — IBMP response surface</h4>
+    <p class="w-desc">Equation 5.1 rendered as a contour plot across the (temperature, time) plane, with the NaCl axis on a slider. Drag the slider to see the response surface change with salt level; the cross marks the predicted maximum at that NaCl level. The deeper the green, the higher log(A<sub>IBMP</sub>).</p>
+    <div class="w-controls">
+      <div class="w-ctrl">
+        <label>NaCl coded X<sub>3</sub> <span class="v" id="rsm-nacl-v">+1.00</span></label>
+        <input type="range" id="rsm-nacl" min="-1" max="1" step="0.05" value="1">
+      </div>
+    </div>
+    <svg viewBox="0 0 360 320" id="rsm-svg" role="img" aria-label="IBMP response surface contour plot">
+      <!-- axes labels added after grid is rendered -->
+      <g id="rsm-cells"></g>
+      <g font-family="Inter, sans-serif" font-size="9" fill="#3A3631">
+        <line x1="50" y1="270" x2="350" y2="270" stroke="#14110D" stroke-width="0.7"/>
+        <line x1="50" y1="20"  x2="50"  y2="270" stroke="#14110D" stroke-width="0.7"/>
+        <text x="200" y="292" text-anchor="middle" font-size="10">temperature X<tspan font-size="7" dy="2">1</tspan><tspan dy="-2"> (30, 45, 60 &deg;C)</tspan></text>
+        <text x="20" y="145" transform="rotate(-90 20 145)" text-anchor="middle" font-size="10">time X<tspan font-size="7" dy="2">2</tspan><tspan dy="-2"> (15, 37.5, 60 min)</tspan></text>
+        <text x="50"  y="285" text-anchor="middle">30</text>
+        <text x="200" y="285" text-anchor="middle">45</text>
+        <text x="350" y="285" text-anchor="middle">60 &deg;C</text>
+        <text x="46"  y="273" text-anchor="end">15</text>
+        <text x="46"  y="148" text-anchor="end">37.5</text>
+        <text x="46"  y="23"  text-anchor="end">60 min</text>
+      </g>
+      <!-- max marker -->
+      <g id="rsm-max" transform="translate(50 270)">
+        <line x1="-7" y1="0" x2="7" y2="0" stroke="#5C0F1F" stroke-width="2"/>
+        <line x1="0" y1="-7" x2="0" y2="7" stroke="#5C0F1F" stroke-width="2"/>
+      </g>
+    </svg>
+    <div class="w-readout">
+      <span class="k">Predicted maximum</span><span class="v" id="rsm-maxv">5.84</span>
+      <span class="k">Optimum (X<sub>1</sub>, X<sub>2</sub>)</span><span class="v" id="rsm-maxxy">+1.00, +1.00</span>
+      <span class="k">Decoded (&deg;C, min)</span><span class="v" id="rsm-maxdec">60.0 &deg;C, 60.0 min</span>
+      <span class="k">Range across surface</span><span class="v" id="rsm-range">3.81 to 5.84</span>
+    </div>
+    <a class="src-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/spme_method_dev.py#L212" rel="noopener">code/spme_method_dev.py · fit_quadratic_rsm</a>
+  </div>
 
   <h3>5.4 Extraction isotherm verification</h3>
   <p>At the working optimum, extraction-time isotherms were measured at <em>t</em> = 5, 10, 15, 20, 30, 45, 60, 90 min for each representative analyte; the first-order Pawliszyn isotherm <em>n(t) = n<sub>&infin;</sub> (1 &minus; e<sup>&minus;t/&tau;</sup>)</em> was fit by golden-section descent (<code>spme_method_dev.py</code> <code>fit_isotherm</code>). The 95 % equilibrium times are summarized in Table 5.2 and confirm the chosen 30 min sampling falls in the pre-equilibrium regime for the heaviest analytes (TDN, ethyl decanoate) but within the equilibrium plateau for the methoxypyrazine, ester, and volatile-phenol clusters that dominate the panel by OAV. The method commits to constant 30 min sampling on this basis; sensitivity for the late-equilibrating analytes is sacrificed for throughput.</p>
@@ -819,6 +1049,46 @@
   <p>Retention-time windows of &plusmn; 0.5 min were placed around each analyte&rsquo;s expected RT, and the combined retention-time database was passed to <code>code/mrm_optimizer.py</code> for sweep-line segmentation. The algorithm sorts all window breakpoints, computes the active transitions per segment, and solves for the maximum dwell time satisfying the PPP target. With FWHM = 5 s, PPP = 12, and interscan delay = 5 ms, the panel resolves into 37 acquisition segments across the 47.3 min runtime, with maximum <em>N<sub>concurrent</sub></em> of 8 in the central RT region (22 to 30 min, where methoxypyrazines, monoterpenes, and norisoprenoids overlap) and minimum dwell of 36 ms in the busiest segment.</p>
 
   <p>Equation 3.8 places the limiting segment at dwell <em>D</em> = (5000 / 12) / 8 &minus; 5 = 47 ms; the algorithm constructed an actual minimum of 36 ms in the eight-transition busy segment after enforcing equal time allocation across transitions. Across the run, dwell ranged from 36 ms to 95 ms; PPP exceeded 12 in every segment by a comfortable margin.</p>
+
+  <!-- ======== Interactive widget: scheduled-MRM segment visualizer ======== -->
+  <div class="widget" id="seg-widget" role="region" aria-label="Scheduled MRM segment visualizer">
+    <h4 class="w-title">Interactive — scheduled-MRM segment plan</h4>
+    <p class="w-desc">The 37 acquisition segments rendered along the 47.3 min chromatographic timeline, colored by concurrency. Hover or tap a segment to see N<sub>concurrent</sub>, dwell, and points-per-peak for that retention window. The crowded 12-15 min band is where smoke-taint phenols collapse retention onto each other; the late-eluting norisoprenoid tail spreads back out.</p>
+    <div class="w-controls">
+      <div class="w-ctrl" style="min-width:200px">
+        <label>Target points-per-peak <span class="v" id="seg-ppp-v">12</span></label>
+        <input type="range" id="seg-ppp" min="6" max="20" step="1" value="12">
+      </div>
+      <div class="w-ctrl">
+        <label>Peak FWHM (s) <span class="v" id="seg-fwhm-v">5</span></label>
+        <input type="range" id="seg-fwhm" min="3" max="10" step="0.5" value="5">
+      </div>
+    </div>
+    <svg viewBox="0 0 720 160" id="seg-svg" role="img" aria-label="Scheduled MRM segment plan visualization">
+      <g font-family="Inter, sans-serif" font-size="9" fill="#3A3631">
+        <line x1="40" y1="120" x2="700" y2="120" stroke="#14110D" stroke-width="0.7"/>
+        <text x="40"  y="138" text-anchor="middle">0</text>
+        <text x="180" y="138" text-anchor="middle">10</text>
+        <text x="320" y="138" text-anchor="middle">20</text>
+        <text x="460" y="138" text-anchor="middle">30</text>
+        <text x="600" y="138" text-anchor="middle">40</text>
+        <text x="700" y="138" text-anchor="middle">50 min</text>
+        <text x="370" y="155" text-anchor="middle" font-size="10">retention time (min)</text>
+      </g>
+      <g id="seg-bars"></g>
+      <text id="seg-hover" x="370" y="18" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#5C0F1F">tap a segment</text>
+    </svg>
+    <div class="w-readout">
+      <span class="k">Total segments</span><span class="v" id="seg-count">37</span>
+      <span class="k">Max N<sub>concurrent</sub></span><span class="v" id="seg-nmax">10</span>
+      <span class="k">Min dwell (limiting segment)</span><span class="v" id="seg-dmin">36.67 ms</span>
+      <span class="k">Worst-case PPP (achieved)</span><span class="v" id="seg-pppach">12.0</span>
+      <span class="k">Method total runtime</span><span class="v">47.3 min</span>
+      <span class="k">Working FWHM</span><span class="v" id="seg-fwhm-r">5.0 s</span>
+    </div>
+    <a class="src-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/MRM/plans/20260512_221945/acquisition_plan.json" rel="noopener">MRM/plans/&hellip;/acquisition_plan.json</a>
+    &nbsp;<a class="src-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/mrm_optimizer.py#L166" rel="noopener">code/mrm_optimizer.py · build_segments</a>
+  </div>
 
   <h3>6.5 Ion-ratio acceptance</h3>
   <p>SANTE/11312/2021 &plusmn; 30 % is adopted as the primary ion-ratio acceptance band, with 2002/657/EC sliding-scale fallback (&plusmn; 50 % when qualifier abundance is below 10 % of quantifier) applied at the LOQ boundary for IBMP and TCA where qualifier S/N drops below 5. Per-analyte ion ratios established on triplicate 50 ng/L standards are recorded in the method file as the reference value for each batch; routine batches are accepted only if ion ratio falls within the acceptance band.</p>
@@ -1133,6 +1403,243 @@
   <div class="meta" id="cpd-meta"></div>
   <div class="tr" id="cpd-tr"></div>
 </div>
+
+<script>
+/* ================================================================
+   Interactive widgets — extraction kinetics, IBMP RSM, MRM segments
+   ================================================================ */
+
+(function(){
+  /* ---------- Widget 1: Pawliszyn extraction-isotherm explorer ---------- */
+  var sel = document.getElementById('iso-analyte');
+  var tau = document.getElementById('iso-tau');
+  var tauV = document.getElementById('iso-tau-v');
+  var curve = document.getElementById('iso-curve');
+  var mark  = document.getElementById('iso-mark');
+  var tauOut = document.getElementById('iso-tau-out');
+  var teqOut = document.getElementById('iso-teq');
+  var fracOut = document.getElementById('iso-frac30');
+  var decisionOut = document.getElementById('iso-decision');
+  if (!sel) return;  // widget absent
+
+  function drawIso() {
+    var t = parseFloat(tau.value);
+    var W = 310, H = 170, X0 = 40, Y0 = 190;
+    var path = 'M ' + X0 + ',' + Y0;
+    for (var x = 0; x <= 90; x += 0.5) {
+      var f = 1 - Math.exp(-x / t);
+      var px = X0 + (x/90) * W;
+      var py = Y0 - f * H;
+      path += ' L ' + px.toFixed(2) + ',' + py.toFixed(2);
+    }
+    curve.setAttribute('d', path);
+    // intercept at 30 min
+    var f30 = 1 - Math.exp(-30 / t);
+    var mx = X0 + (30/90) * W;
+    var my = Y0 - f30 * H;
+    mark.setAttribute('cx', mx);
+    mark.setAttribute('cy', my);
+    tauV.textContent = t.toFixed(1);
+    tauOut.textContent = t.toFixed(1) + ' min';
+    teqOut.textContent = (3*t).toFixed(1) + ' min';
+    fracOut.textContent = (100*f30).toFixed(1) + ' %';
+    var dec;
+    if (f30 >= 0.95) dec = 'equilibrium ✓';
+    else if (f30 >= 0.85) dec = 'near-equilibrium';
+    else dec = 'pre-equilibrium · constant-time required';
+    decisionOut.textContent = dec;
+  }
+  sel.addEventListener('change', function(){
+    var parts = sel.value.split('|');
+    tau.value = parts[0];
+    drawIso();
+  });
+  tau.addEventListener('input', drawIso);
+  drawIso();
+})();
+
+(function(){
+  /* ---------- Widget 2: IBMP response-surface contour explorer ---------- */
+  /* Equation 5.1: log(A_IBMP) = 5.21 + 0.43*X1 + 0.31*X2 + 0.18*X3
+                  - 0.12*X1^2 - 0.07*X2^2 - 0.03*X3^2 + 0.05*X1*X2  */
+  var RSM = { b0: 5.21, b1: 0.43, b2: 0.31, b3: 0.18,
+              b11: -0.12, b22: -0.07, b33: -0.03, b12: 0.05 };
+  function predict(x1, x2, x3) {
+    return RSM.b0 + RSM.b1*x1 + RSM.b2*x2 + RSM.b3*x3 +
+           RSM.b11*x1*x1 + RSM.b22*x2*x2 + RSM.b33*x3*x3 + RSM.b12*x1*x2;
+  }
+  var naclEl  = document.getElementById('rsm-nacl');
+  var cellsEl = document.getElementById('rsm-cells');
+  var maxEl   = document.getElementById('rsm-max');
+  var naclV   = document.getElementById('rsm-nacl-v');
+  var maxV    = document.getElementById('rsm-maxv');
+  var maxXY   = document.getElementById('rsm-maxxy');
+  var maxDec  = document.getElementById('rsm-maxdec');
+  var rangeOut = document.getElementById('rsm-range');
+  if (!naclEl) return;
+
+  // axis mapping helpers
+  function mapX(x1) { return 50 + (x1+1)/2 * 300; }   // X0=50, span 300 → 50..350
+  function mapY(x2) { return 270 - (x2+1)/2 * 250; }  // Y0=270, span 250 → 20..270
+  function decodeT(x1) { return 30 + (x1+1)/2 * 30; } // 30 to 60 °C
+  function decodeTm(x2) { return 15 + (x2+1)/2 * 45; } // 15 to 60 min
+
+  function color(v, lo, hi) {
+    // pyrazine-green gradient
+    if (hi <= lo) return '#4A5D3B';
+    var t = (v - lo) / (hi - lo);
+    t = Math.max(0, Math.min(1, t));
+    // light cream → pyrazine green → ink
+    var r = Math.round(243 - 200*t);
+    var g = Math.round(235 - 142*t);
+    var b = Math.round(213 - 154*t);
+    return 'rgb(' + r + ',' + g + ',' + b + ')';
+  }
+
+  function drawRSM() {
+    var x3 = parseFloat(naclEl.value);
+    var STEP = 0.1;
+    // First pass: compute min/max over the surface at this NaCl
+    var vmin = Infinity, vmax = -Infinity;
+    for (var i = -1; i <= 1; i += STEP) {
+      for (var j = -1; j <= 1; j += STEP) {
+        var v = predict(i, j, x3);
+        if (v < vmin) vmin = v;
+        if (v > vmax) vmax = v;
+      }
+    }
+    // Second pass: render cells
+    var cellW = 300 * STEP / 2;
+    var cellH = 250 * STEP / 2;
+    var rects = '';
+    var bestV = -Infinity, bestX1 = -1, bestX2 = -1;
+    for (var i2 = -1; i2 < 1; i2 += STEP) {
+      for (var j2 = -1; j2 < 1; j2 += STEP) {
+        var midI = i2 + STEP/2;
+        var midJ = j2 + STEP/2;
+        var v2 = predict(midI, midJ, x3);
+        if (v2 > bestV) { bestV = v2; bestX1 = midI; bestX2 = midJ; }
+        var px = mapX(i2);
+        var py = mapY(j2 + STEP);
+        rects += '<rect x="' + px.toFixed(2) + '" y="' + py.toFixed(2) +
+                 '" width="' + (cellW+0.5).toFixed(2) + '" height="' + (cellH+0.5).toFixed(2) +
+                 '" fill="' + color(v2, vmin, vmax) + '"/>';
+      }
+    }
+    cellsEl.innerHTML = rects;
+    // Move the max marker
+    maxEl.setAttribute('transform', 'translate(' + mapX(bestX1).toFixed(1) + ' ' + mapY(bestX2).toFixed(1) + ')');
+    // Readout
+    naclV.textContent = (x3 >= 0 ? '+' : '') + x3.toFixed(2);
+    maxV.textContent = bestV.toFixed(2);
+    maxXY.textContent = (bestX1 >= 0 ? '+' : '') + bestX1.toFixed(2) + ', ' +
+                        (bestX2 >= 0 ? '+' : '') + bestX2.toFixed(2);
+    maxDec.textContent = decodeT(bestX1).toFixed(1) + ' °C, ' + decodeTm(bestX2).toFixed(1) + ' min';
+    rangeOut.textContent = vmin.toFixed(2) + ' to ' + vmax.toFixed(2);
+  }
+  naclEl.addEventListener('input', drawRSM);
+  drawRSM();
+})();
+
+(function(){
+  /* ---------- Widget 3: scheduled-MRM segment visualizer ---------- */
+  /* Real plan from MRM/plans/20260512_221945/acquisition_plan.json
+     Each tuple: [start_min, end_min, n_concurrent, dwell_ms, ppp] */
+  var SEGMENTS = [
+    [3.0,4.0,2,203.33,12.0],[6.5,7.0,2,203.33,12.0],[7.0,7.5,4,99.17,12.0],
+    [7.5,8.0,2,203.33,12.0],[8.5,9.5,2,203.33,12.0],[10.8,11.8,2,203.33,12.0],
+    [11.8,12.0,2,203.33,12.0],[12.0,12.2,6,64.44,12.0],[12.2,12.6,8,47.08,12.0],
+    [12.6,12.8,10,36.67,12.0],[12.8,13.0,8,47.08,12.0],[13.0,13.2,4,99.17,12.0],
+    [13.2,13.6,2,203.33,12.0],[13.9,14.5,2,203.33,12.0],[14.5,14.8,4,99.17,12.0],
+    [14.8,14.9,6,64.44,12.0],[14.9,15.5,4,99.17,12.0],[15.5,15.6,2,203.33,12.0],
+    [15.6,15.8,4,99.17,12.0],[15.8,16.5,2,203.33,12.0],[16.5,16.6,4,99.17,12.0],
+    [16.6,17.5,2,203.33,12.0],[17.5,18.5,2,203.33,12.0],[18.5,19.5,6,64.44,12.0],
+    [19.5,20.5,2,203.33,12.0],[20.5,21.5,2,203.33,12.0],[21.5,22.5,4,99.17,12.0],
+    [22.5,23.5,4,99.17,12.0],[23.5,24.5,2,203.33,12.0],[24.5,25.5,2,203.33,12.0],
+    [26.5,27.5,2,203.33,12.0],[27.5,28.5,5,78.33,12.0],[29.5,30.5,4,99.17,12.0],
+    [31.5,32.5,2,203.33,12.0],[36.7,37.7,2,203.33,12.0],[43.1,44.1,1,411.67,12.0],
+    [49.3,50.3,2,203.33,12.0]
+  ];
+  var bars = document.getElementById('seg-bars');
+  var hov  = document.getElementById('seg-hover');
+  var pppEl = document.getElementById('seg-ppp');
+  var fwhmEl = document.getElementById('seg-fwhm');
+  var pppV = document.getElementById('seg-ppp-v');
+  var fwhmV = document.getElementById('seg-fwhm-v');
+  var nmaxOut = document.getElementById('seg-nmax');
+  var dminOut = document.getElementById('seg-dmin');
+  var pppAchOut = document.getElementById('seg-pppach');
+  var fwhmROut = document.getElementById('seg-fwhm-r');
+  if (!bars) return;
+
+  // map: time 0..52 → x 40..700
+  function mapT(t){ return 40 + (t/52)*660; }
+  function ncolor(n){
+    if (n <= 2)  return '#D5E4C9';
+    if (n <= 4)  return '#9DCB58';
+    if (n <= 6)  return '#5A7752';
+    if (n <= 8)  return '#3E5A26';
+    return '#1F3210';
+  }
+  function recalcDwell(n, peakFwhmS, pppTarget, interscanMs){
+    var d = ((peakFwhmS / pppTarget) * 1000.0) / n - interscanMs;
+    return Math.max(5.0, d);
+  }
+  function recalcPPP(n, dwellMs, peakFwhmS, interscanMs){
+    var ctMs = n * (dwellMs + interscanMs);
+    return (peakFwhmS * 1000.0) / ctMs;
+  }
+
+  function drawSegs(){
+    var pppT = parseFloat(pppEl.value);
+    var fwhm = parseFloat(fwhmEl.value);
+    pppV.textContent = pppT.toFixed(0);
+    fwhmV.textContent = fwhm.toFixed(1);
+    fwhmROut.textContent = fwhm.toFixed(1) + ' s';
+
+    var html = '';
+    var nMax = 0;
+    var dMin = Infinity;
+    var pppMin = Infinity;
+    for (var i = 0; i < SEGMENTS.length; i++){
+      var s = SEGMENTS[i];
+      var x1 = mapT(s[0]);
+      var x2 = mapT(s[1]);
+      var n  = s[2];
+      var d  = recalcDwell(n, fwhm, pppT, 5.0);
+      var ppp = recalcPPP(n, d, fwhm, 5.0);
+      if (n > nMax) nMax = n;
+      if (d < dMin) dMin = d;
+      if (ppp < pppMin) pppMin = ppp;
+      // bar: height proportional to n, anchored at y=120
+      var barH = 8 + n * 9;
+      var y = 120 - barH;
+      var w = Math.max(1.5, x2 - x1);
+      var color = ncolor(n);
+      var tag = (i+1) + ' · ' + s[0].toFixed(1) + '–' + s[1].toFixed(1) + ' min · N=' + n + ' · dwell=' + d.toFixed(1) + 'ms · PPP=' + ppp.toFixed(1);
+      html += '<rect x="' + x1.toFixed(2) + '" y="' + y.toFixed(2) +
+              '" width="' + w.toFixed(2) + '" height="' + barH.toFixed(2) +
+              '" fill="' + color + '" stroke="#14110D" stroke-width="0.3" ' +
+              'data-tag="' + tag + '" data-i="' + i + '" style="cursor:pointer"></rect>';
+    }
+    bars.innerHTML = html;
+    nmaxOut.textContent = nMax;
+    dminOut.textContent = (dMin === Infinity ? '—' : dMin.toFixed(2) + ' ms');
+    pppAchOut.textContent = pppMin.toFixed(1);
+
+    // Attach hover handlers
+    var rects = bars.querySelectorAll('rect');
+    rects.forEach(function(r){
+      r.addEventListener('mouseenter', function(){ hov.textContent = r.getAttribute('data-tag'); });
+      r.addEventListener('mouseleave', function(){ hov.textContent = 'tap a segment'; });
+      r.addEventListener('click',      function(){ hov.textContent = r.getAttribute('data-tag'); });
+    });
+  }
+  pppEl.addEventListener('input', drawSegs);
+  fwhmEl.addEventListener('input', drawSegs);
+  drawSegs();
+})();
+</script>
 
 <script>
 (function(){
