@@ -117,9 +117,9 @@ compounds:
     derivatization: none
     internal_standard: d4-damascenone
     transitions:
-      - {precursor: 190, product: 121, ce_ev: 10, role: quan, source: "Schreier/Wuest 2016 ABC"}
-      - {precursor: 190, product: 105, ce_ev: 12, role: qual, source: "Schreier/Wuest 2016"}
-      - {precursor: 190, product: 69, ce_ev: 15, role: confirm, source: "Schreier/Wuest 2016"}
+      - {precursor: 190, product: 121, ce_ev: 10, role: quan, source: "Langen/Wegmann-Herr/Schmarr 2016 ABC"}
+      - {precursor: 190, product: 105, ce_ev: 12, role: qual, source: "Langen/Wegmann-Herr/Schmarr 2016"}
+      - {precursor: 190, product: 69, ce_ev: 15, role: confirm, source: "Langen/Wegmann-Herr/Schmarr 2016"}
 
   beta-ionone:
     name: beta-ionone
@@ -137,8 +137,8 @@ compounds:
     marker_type: varietal
     derivatization: none
     transitions:
-      - {precursor: 192, product: 177, ce_ev: 12, role: quan, source: "Schreier/Wuest 2016"}
-      - {precursor: 192, product: 91, ce_ev: 20, role: qual, source: "Schreier/Wuest 2016"}
+      - {precursor: 192, product: 177, ce_ev: 12, role: quan, source: "Langen/Wegmann-Herr/Schmarr 2016"}
+      - {precursor: 192, product: 91, ce_ev: 20, role: qual, source: "Langen/Wegmann-Herr/Schmarr 2016"}
 
   alpha-ionone:
     name: alpha-ionone
@@ -154,8 +154,8 @@ compounds:
     marker_type: varietal
     derivatization: none
     transitions:
-      - {precursor: 192, product: 177, ce_ev: 10, role: quan, source: "Schreier/Wuest 2016"}
-      - {precursor: 192, product: 121, ce_ev: 15, role: qual, source: "Schreier/Wuest 2016"}
+      - {precursor: 192, product: 177, ce_ev: 10, role: quan, source: "Langen/Wegmann-Herr/Schmarr 2016"}
+      - {precursor: 192, product: 121, ce_ev: 15, role: qual, source: "Langen/Wegmann-Herr/Schmarr 2016"}
 
   TDN:
     name: 1,1,6-trimethyl-1,2-dihydronaphthalene

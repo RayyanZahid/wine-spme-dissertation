@@ -1,9 +1,18 @@
-# Wine SPME Dissertation — Build Index
+# Wine SPME Arrow GC-MS/MS — Method-Development Scaffold
 
-**Title:** Method Development, MRM Optimization, and Validation of SPME Arrow Headspace GC-MS/MS for the Quantitative Profiling of Aroma-Active Volatiles in Cabernet Sauvignon Wine
+**Title:** Method Development Scaffold and Pre-Registered Protocol for SPME Arrow Headspace GC-MS/MS of Aroma-Active Volatiles in Cabernet Sauvignon Wine
 
-**Status:** Drafted 2026-05-12 in a single agent-orchestrated build.
-**Final deliverable:** `drafts/dissertation.html` — 103 KB single self-contained HTML.
+**Status:** Scaffold built 2026-05-12 in an AI-orchestrated literature-synthesis run. Adversarial peer review on 2026-05-13 (via [brutalist-mcp](https://github.com/ejmockler/brutalist-mcp)) surfaced four methodological weaknesses (catalogued in §9.2) and several factual errors (fixed in commits since). Live URL is passphrase-gated (Tier 1 share-gate).
+
+**Honesty disclosure (load-bearing):**
+- No instrument runs have been performed.
+- Chapters 1–6 reflect the published primary literature.
+- Chapter 7 is a validation protocol pending execution.
+- Chapter 8 is a pre-registered application architecture pending data.
+- The previous draft's §7 LOQ / R² / recovery / RSD tables and §8 OPLS-DA accuracies were illustrative templates, not measurements. They have been withdrawn from this version.
+- The artifact is the **method scaffold**: literature integration, transition database, scheduled-MRM segment planner, DoE / RSM / Pawliszyn-isotherm / Setschenow toolkit, validation framework, application architecture, and acknowledged-weaknesses chapter.
+
+**Final deliverable:** `index.html` — single self-contained HTML, live at https://wine-spme-dissertation.vercel.app (passphrase-gated).
 
 ## Build pipeline that produced this
 

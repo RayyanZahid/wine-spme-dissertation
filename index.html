@@ -24,7 +24,7 @@
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "Method Development, MRM Optimization, and Validation of SPME Arrow Headspace GC-MS/MS for the Quantitative Profiling of Aroma-Active Volatiles in Cabernet Sauvignon Wine",
-  "abstract": "A solid-phase microextraction Arrow headspace GC-MS/MS method was developed, optimized, validated, and applied to the quantitative profiling of thirty aroma-active volatiles in Cabernet Sauvignon wine. Sorbent screening selected DVB/CWR/PDMS as the consensus phase across compound classes. A 12-run Plackett-Burman screen followed by a 15-run Box-Behnken response-surface design identified an extraction optimum at 50 °C, 30 min exposure, 4 g NaCl in 5 mL wine. The scheduled-MRM panel covered methoxypyrazines, C13 norisoprenoids, fermentation esters, monoterpenes, varietal thiols, smoke-taint phenols, haloanisoles, and reductive sulfur compounds in a 47.3-min method across 37 acquisition segments, hitting ≥ 12 points-per-peak at the FWHM. Validation against ICH Q2(R2) demonstrated R² ≥ 0.99 over two orders of magnitude, LOQ at 0.1 to 50 ng/L per analyte class, recovery 86 to 114 %, intermediate precision RSDR < 12 % at LOQ, and matrix-effect slope ratios within 0.85 to 1.18.",
+  "abstract": "Method-development scaffold for solid-phase microextraction Arrow headspace GC-MS/MS of thirty aroma-active volatiles in Cabernet Sauvignon wine. No instrument runs performed. Literature integration of ~250 papers, 30-analyte MRM transition database, Python toolkit (DoE / RSM / Pawliszyn-isotherm / scheduled-MRM segment planner), and pre-registered validation + application protocols. Sorbent: DVB/CWR/PDMS. Optimization: Plackett-Burman screen + Box-Behnken response-surface design with composite Derringer-Suich desirability. Scheduled MRM: 37 retention-time segments, 72 unique transitions, 47.3 min total run, twelve points per peak at the limiting concurrency. Validation protocol per ICH Q2(R2). Application protocol pre-registered with nested CV, permutation Q² test, bootstrap VIP CI, and held-out test set. Acknowledged-weaknesses chapter (§9.2) catalogues four methodological failure modes surfaced by adversarial peer review under brutalist-mcp.",
   "keywords": "SPME Arrow, GC-MS/MS, MRM, Cabernet Sauvignon, methoxypyrazine, beta-damascenone, smoke taint, method validation, ICH Q2",
   "inLanguage": "en"
 }
@@ -812,6 +812,131 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 
+  /* ============ Tier 1 share-gate (passphrase) ============ */
+  #iai-gate { display: none; }
+  body.iai-locked #iai-gate {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: var(--gutter);
+    background: var(--cream);
+  }
+  body.iai-locked .masthead,
+  body.iai-locked nav.toc,
+  body.iai-locked .abstract,
+  body.iai-locked main,
+  body.iai-locked footer,
+  body.iai-locked .cpd-pop {
+    display: none !important;
+  }
+  body.iai-locked { overflow: hidden; }
+  .iai-gate-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 32px 28px;
+    background: var(--cream-deep);
+    border: 1px solid var(--ink);
+    max-width: 460px;
+    width: 100%;
+    border-radius: 2px;
+  }
+  .iai-gate-brand {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.008em;
+    color: var(--ink);
+    margin: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .iai-gate-brand .meta {
+    display: block;
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--bordeaux);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 4px;
+  }
+  .iai-gate-note {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+  }
+  .iai-gate-title {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 4px 0 0;
+  }
+  .iai-gate-input {
+    font-family: var(--mono);
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    padding: 12px 14px;
+    background: var(--cream);
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 180ms ease;
+    border-radius: 2px;
+  }
+  .iai-gate-input:focus { border-color: var(--bordeaux); }
+  .iai-gate-input::placeholder { color: var(--ink-soft); }
+  .iai-gate-submit {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    background: var(--ink);
+    color: var(--cream);
+    border: 1px solid var(--ink);
+    cursor: pointer;
+    transition: background 180ms ease, color 180ms ease;
+    border-radius: 2px;
+  }
+  .iai-gate-submit:hover {
+    background: var(--bordeaux);
+    border-color: var(--bordeaux);
+  }
+  .iai-gate-error {
+    display: none;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bordeaux);
+    margin: 0;
+  }
+  #iai-gate.error .iai-gate-error { display: block; }
+  #iai-gate.error .iai-gate-input {
+    border-color: var(--bordeaux);
+    animation: iai-gate-shake 320ms ease;
+  }
+  @keyframes iai-gate-shake {
+    0%   { transform: translateX(0); }
+    20%  { transform: translateX(-6px); }
+    40%  { transform: translateX(6px); }
+    60%  { transform: translateX(-4px); }
+    80%  { transform: translateX(4px); }
+    100% { transform: translateX(0); }
+  }
+
   /* print */
   @media print {
     .cpd-pop, footer, nav.toc { display: none; }
@@ -824,16 +949,103 @@
 </head>
 <body>
 
+<!-- Tier 1 share-gate (passphrase: PyrazineGreen). Threat model: stop casual link-forwarding and search-engine indexing; the work is provenance-disclosed and adversarially audited but not yet wet-lab executed. Not a defense against a determined viewer with devtools. -->
+<div id="iai-gate" role="dialog" aria-modal="true" aria-labelledby="iai-gate-title">
+  <div class="iai-gate-card">
+    <h2 class="iai-gate-brand"><span class="meta">Method Scaffold · Pre-Registered Protocol</span>SPME Arrow GC-MS/MS · Cabernet Sauvignon</h2>
+    <p class="iai-gate-note">This artifact is a method-development scaffold with provenance disclosure and adversarial peer review. No instrument runs have been performed. Access is gated to keep search engines from indexing the in-progress draft and to ensure readers arrive with the disclosed context.</p>
+    <h3 id="iai-gate-title" class="iai-gate-title">passphrase</h3>
+    <input
+      type="password"
+      id="iai-gate-input"
+      class="iai-gate-input"
+      placeholder="type to unlock"
+      autocomplete="off"
+      autocapitalize="off"
+      autocorrect="off"
+      spellcheck="false"
+      aria-label="Passphrase">
+    <button type="button" id="iai-gate-submit" class="iai-gate-submit">unlock</button>
+    <p class="iai-gate-error" id="iai-gate-error" aria-live="polite">incorrect, try again.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  // SHA-256 of "PyrazineGreen" — Tier 1 client-side share-gate, not real access control.
+  // See CC-PRO templates/deck/password-gate/README.md for the honest threat model.
+  const PASSWORD_HASH = 'b05a4580a455677fe0bb2576b86fe4bef136b67e804c1cacd88e161f190df63c';
+  const STORAGE_KEY = 'iai_unlocked';
+  const URL_PARAM = 'key';
+
+  async function sha256Hex(text) {
+    const bytes = new TextEncoder().encode(text);
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
+    return Array.from(new Uint8Array(digest))
+      .map((b) => b.toString(16).padStart(2, '0')).join('');
+  }
+  function showGate() {
+    document.body.classList.add('iai-locked');
+    const input = document.getElementById('iai-gate-input');
+    if (input) setTimeout(() => input.focus(), 50);
+  }
+  function hideGate() {
+    document.body.classList.remove('iai-locked');
+    const gate = document.getElementById('iai-gate');
+    if (gate) gate.classList.remove('error');
+  }
+  function flagError() {
+    const gate = document.getElementById('iai-gate');
+    const input = document.getElementById('iai-gate-input');
+    if (gate) { gate.classList.remove('error'); void gate.offsetWidth; gate.classList.add('error'); }
+    if (input) { input.value = ''; input.focus(); }
+  }
+  async function tryUnlock(candidate) {
+    if (!candidate) return false;
+    return (await sha256Hex(candidate)) === PASSWORD_HASH;
+  }
+  async function init() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === PASSWORD_HASH) { hideGate(); return; }
+    const params = new URLSearchParams(window.location.search);
+    const urlKey = params.get(URL_PARAM);
+    if (urlKey && (await tryUnlock(urlKey))) {
+      localStorage.setItem(STORAGE_KEY, PASSWORD_HASH);
+      hideGate(); return;
+    }
+    showGate();
+    const input = document.getElementById('iai-gate-input');
+    const submit = document.getElementById('iai-gate-submit');
+    if (!input || !submit) return;
+    async function attempt() {
+      if (await tryUnlock(input.value)) {
+        localStorage.setItem(STORAGE_KEY, PASSWORD_HASH);
+        hideGate();
+      } else { flagError(); }
+    }
+    submit.addEventListener('click', attempt);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); attempt(); }
+    });
+  }
+  // Apply the locked state immediately so the deck doesn't flash before init runs.
+  document.body.classList.add('iai-locked');
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
+</script>
+
 <header class="masthead" id="top">
   <div class="top">
-    <span>Doctoral Dissertation</span>
+    <span>Method Scaffold · Pre-Registered Protocol</span>
     <span>Analytical Chemistry · Enology</span>
     <span>2026</span>
   </div>
   <h1>Quantifying What the Glass Already Says</h1>
-  <p class="subtitle">Method development, MRM optimization, and validation of solid-phase microextraction Arrow headspace GC-MS/MS for the aroma-active volatiles of Cabernet Sauvignon.</p>
-  <p class="byline">A dissertation submitted in partial fulfilment of the requirements for the degree of Doctor of Philosophy. <br>
-  <strong>Department of Viticulture and Enology</strong> · College of Agricultural and Environmental Sciences.</p>
+  <p class="subtitle">A method-development scaffold for solid-phase microextraction Arrow headspace GC-MS/MS of the aroma-active volatiles of Cabernet Sauvignon. Literature integration + transition database + DoE toolkit + scheduled-MRM segment planner + ICH Q2(R2) validation protocol + pre-registered application architecture. <em>No instrument runs performed.</em></p>
+  <p class="byline">AI-orchestrated literature synthesis &amp; method-scaffold build, 2026-05-12, audited under adversarial peer review (<a href="https://github.com/ejmockler/brutalist-mcp" rel="noopener" style="color: inherit; border-bottom: 1px dotted">brutalist-mcp</a>) on 2026-05-13. The acknowledged-weaknesses chapter (&sect;9.2) catalogues four methodological failure modes the review surfaced and the experimental remediation for each. <strong>Wet-lab execution against this scaffold is the work that converts it to a validated procedure.</strong></p>
   <a class="repo-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation" rel="noopener">github.com/RayyanZahid/wine-spme-dissertation</a>
   &nbsp; <a class="repo-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation/tree/main/code" rel="noopener">code/</a>
   &nbsp; <a class="repo-pill" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/MRM/transitions.yaml" rel="noopener">MRM/transitions.yaml</a>
@@ -848,8 +1060,8 @@
     <li><span class="n">04</span><a href="#methods">Materials and Methods</a><span class="pg">29</span></li>
     <li><span class="n">05</span><a href="#spme">SPME Arrow Method Development</a><span class="pg">38</span></li>
     <li><span class="n">06</span><a href="#mrm">MRM Optimization</a><span class="pg">52</span></li>
-    <li><span class="n">07</span><a href="#validation">Method Validation</a><span class="pg">68</span></li>
-    <li><span class="n">08</span><a href="#results">Results and Discussion</a><span class="pg">82</span></li>
+    <li><span class="n">07</span><a href="#validation">Method Validation Protocol</a><span class="pg">68</span></li>
+    <li><span class="n">08</span><a href="#results">Application Protocol</a><span class="pg">82</span></li>
     <li><span class="n">09</span><a href="#conclusions">Conclusions</a><span class="pg">98</span></li>
     <li><span class="n">10</span><a href="#codelab">Code Lab — live Python</a><span class="pg">101</span></li>
     <li><span class="n">11</span><a href="#references">References</a><span class="pg">108</span></li>
@@ -857,11 +1069,14 @@
 </nav>
 
 <section class="abstract" id="abstract" aria-labelledby="abs-tag">
-  <span class="tag" id="abs-tag">Abstract</span>
-  <p>A solid-phase microextraction (SPME) Arrow headspace gas chromatography tandem mass spectrometry (GC-MS/MS) method was developed, optimized, validated, and applied to the quantitative profiling of thirty aroma-active volatile compounds in Cabernet Sauvignon wine. The target panel covered methoxypyrazines, C13 norisoprenoids, fermentation esters, monoterpenes, varietal thiols, smoke-taint phenols, haloanisoles, and reductive sulfur compounds.</p>
-  <p>A 12-run Plackett-Burman screen across seven extraction factors identified extraction temperature, extraction time, and sodium chloride mass as significant; a subsequent 15-run Box-Behnken design with composite Derringer-Suich desirability optimization placed the working method at 50 °C, 30 min exposure, 4 g NaCl, in 5 mL wine matrix dispersed in a 20 mL headspace vial. DVB/CWR/PDMS was selected as the consensus sorbent across compound classes.</p>
-  <p>The scheduled-MRM acquisition was built across 37 retention-time segments covering 72 unique transitions in a 47.3-min total run, achieving twelve or more points per chromatographic peak (4.5 s FWHM) at every segment. Collision energies were optimized per transition by 2.5-eV ramp; ion-ratio acceptance followed SANTE/11312/2021 with a 2002/657/EC fallback at the limit of quantification (LOQ) boundary.</p>
-  <p>Validation against ICH Q2(R2) demonstrated linearity (R² ≥ 0.99 across two orders of magnitude per analyte), LOQ between 0.1 ng/L (trichloroanisole, ³⁷Cl isotopologue confirmation) and 50 ng/L (3-isobutyl-2-methoxypyrazine), recovery 86 to 114 % at three spike levels, intermediate-precision RSDR below 12 % at LOQ, and matrix-effect slope ratios within the 0.85 to 1.18 acceptance band. Application of the validated method to a thirty-bottle Cabernet Sauvignon panel spanning Napa, Bordeaux, Coonawarra, Maipo, Stellenbosch, and Mendoza differentiated appellation, vintage, and oak program by orthogonal partial least squares discriminant analysis (OPLS-DA), with cis- and trans-whisky lactone, vanillin, and β-damascenone emerging as the top loading variables.</p>
+  <span class="tag" id="abs-tag">Abstract · Method Scaffold</span>
+  <p><strong>Provenance disclosure (load-bearing):</strong> this artifact is a method-development scaffold built from a ~250-paper literature corpus, six deep WebSearch research briefs, and adversarial peer review. <em>No instrument runs have been performed.</em> Sections 1 through 5 reflect the published primary literature. Sections 6 (MRM optimization) and 7 (validation) are protocols pending execution. Section 8 is a forward-looking application architecture pending experimental data. The acknowledged-weaknesses section (&sect;9.2) catalogues four methodological failure modes the brutalist-mcp adversarial peer review surfaced, with the experimental remediation for each.</p>
+
+  <p>A solid-phase microextraction (SPME) Arrow headspace gas chromatography tandem mass spectrometry (GC-MS/MS) method <em>is proposed</em> for the quantitative profiling of thirty aroma-active volatile compounds in Cabernet Sauvignon wine. The target panel covers methoxypyrazines, C13 norisoprenoids, fermentation esters, monoterpenes, varietal thiols, smoke-taint phenols, haloanisoles, and reductive sulfur compounds, with the literature-justified sorbent (DVB/CWR/PDMS), an optimization plan via Plackett-Burman screening followed by Box-Behnken response-surface refinement with composite Derringer-Suich desirability, and a scheduled-MRM acquisition computed across 37 retention-time segments covering 72 unique transitions in a 47.3 min total run with twelve or more points per chromatographic peak at the limiting concurrency.</p>
+
+  <p>The validation chapter (&sect;7) specifies the ICH Q2(R2) protocol, supporting AOAC SMPR / EURACHEM / OIV / SANTE/11312/2021 references, and per-characteristic acceptance criteria. Ion-ratio acceptance follows SANTE/11312/2021 &plusmn; 30 %, with a hard qualifier S/N floor of three (the previous draft&rsquo;s 2002/657/EC sliding-scale fallback at the LOQ boundary is withdrawn as adversarially-fragile). The application chapter (&sect;8) describes a pre-registered experimental protocol for a multi-region Cabernet Sauvignon panel sufficient in size for defensible OPLS-DA discrimination (n &ge; 30 wines per appellation, nested cross-validation, permutation-test Q&sup2;, held-out test set) &mdash; the small-n design of the previous draft was withdrawn after peer review.</p>
+
+  <p>The dissertation&rsquo;s deliverable is the method scaffold itself: the transition database (<code>MRM/transitions.yaml</code>), the scheduled-MRM segment planner with cycle-time math (<code>code/mrm_optimizer.py</code>), the DoE / RSM / Pawliszyn-isotherm / Setschenow toolkit (<code>code/spme_method_dev.py</code>), the literature integration in &sect;3, and the explicit limitations chapter in &sect;9. Wet-lab execution against this scaffold is the work that converts it from a method scaffold to a validated analytical procedure with empirical results.</p>
 </section>
 
 <main>
@@ -915,7 +1130,7 @@
   <h4>3.1.2 C13 norisoprenoids &mdash; the carotenoid-derived signature</h4>
   <p>Cleavage of grape-derived carotenoids by 9,10- and 13,14-dioxygenases generates the C13 norisoprenoid family: <dfn class="cpd" data-cas="23696-85-7" data-formula="C13H18O" data-mw="190.28" data-threshold="0.05 µg/L (water); 4 µg/L (red wine)" data-quan="190 → 121" data-ce="10 eV">β-damascenone</dfn> (stewed apple, plum compote, raspberry jam) at typical 1 to 10 µg/L in Cabernet; <dfn class="cpd" data-cas="14901-07-6" data-formula="C13H20O" data-mw="192.30" data-threshold="0.09 µg/L" data-quan="192 → 177" data-ce="12 eV">β-ionone</dfn> (violet, woody) at 0.05 to 1.0 µg/L; α-ionone, vitispirane, actinidol; and the aged-Cabernet kerosene marker <dfn class="cpd" data-cas="30364-38-6" data-formula="C13H16" data-mw="172.27" data-threshold="4 µg/L" data-quan="172 → 157" data-ce="15 eV">TDN</dfn> (1,1,6-trimethyl-1,2-dihydronaphthalene), at 0.5 to 2.5 µg/L in young Cabernet but rising in long-aged bottles.</p>
   <p>β-Damascenone has a sensory paradox: its hydroalcoholic threshold (0.05 µg/L) is two orders of magnitude lower than its red-wine threshold (4 to 7 µg/L), because the wine matrix substantially reduces the volatile&rsquo;s perceived intensity. This matrix-effect chemistry is one of the load-bearing facts a quantitative method must respect: an analytical sensitivity gain of 100&times; would not buy a sensory gain of 100&times;. Method validation must report both the analytical LOQ and the wine-matrix OAV.</p>
-  <p>The published QqQ-MS/MS transitions follow Schreier and Wuest: β-damascenone <span class="mono">190 &rarr; 121</span> quantifier at 10 eV, <span class="mono">190 &rarr; 105</span> qualifier at 12 eV, <span class="mono">190 &rarr; 69</span> as a secondary confirmation; β-ionone <span class="mono">192 &rarr; 177</span> at 12 eV; α-ionone <span class="mono">192 &rarr; 177</span> at 10 eV with the additional <span class="mono">192 &rarr; 121</span> to disambiguate from β.</p>
+  <p>The published QqQ-MS/MS transitions follow Langen, Wegmann-Herr and Schmarr: β-damascenone <span class="mono">190 &rarr; 121</span> quantifier at 10 eV, <span class="mono">190 &rarr; 105</span> qualifier at 12 eV, <span class="mono">190 &rarr; 69</span> as a secondary confirmation; β-ionone <span class="mono">192 &rarr; 177</span> at 12 eV; α-ionone <span class="mono">192 &rarr; 177</span> at 10 eV with the additional <span class="mono">192 &rarr; 121</span> to disambiguate from β.</p>
 
   <h4>3.1.3 Fermentation esters</h4>
   <p>The McLafferty rearrangement of ethyl esters of medium-chain fatty acids dominates Cabernet&rsquo;s mid-palate fruit. <dfn class="cpd" data-cas="106-32-1" data-formula="C10H20O2" data-mw="172.27" data-threshold="2 µg/L" data-quan="172 → 88" data-ce="10 eV">Ethyl octanoate</dfn> (pear, sweet) at 346 to 5108 µg/L, <dfn class="cpd" data-cas="123-66-0" data-formula="C8H16O2" data-mw="144.21" data-threshold="5 µg/L" data-quan="144 → 88" data-ce="10 eV">ethyl hexanoate</dfn> (green apple) at 289 to 4107 µg/L, and <dfn class="cpd" data-cas="123-92-2" data-formula="C7H14O2" data-mw="130.18" data-threshold="30 µg/L" data-quan="70 → 43" data-ce="10 eV">isoamyl acetate</dfn> (banana) at 3254 to 14733 µg/L drive 90 %-plus of fermentation-aroma OAV in a typical Cabernet. The MRM transitions exploit the McLafferty rearrangement product ion at <span class="mono">m/z 88</span>, universal to the ethyl-ester class. Chain-length-specific quantification comes from selecting the molecular ion at Q1 — <span class="mono">116</span> for ethyl butanoate, <span class="mono">144</span> for hexanoate, <span class="mono">172</span> for octanoate, <span class="mono">200</span> for decanoate — and the McLafferty <span class="mono">m/z 88</span> as the Q3 quantifier (the chain-class hand-off is in Q1, not Q3). Diagnostic chain-specific alkyl-acylium fragments (<span class="mono">m/z 71 / 99 / 127 / 155</span> for the C4 / C6 / C8 / C10 esters respectively) serve as qualifier transitions from the same molecular-ion precursor.</p>
@@ -1274,69 +1489,80 @@
   </div>
 
   <h3>6.5 Ion-ratio acceptance</h3>
-  <p>SANTE/11312/2021 &plusmn; 30 % is adopted as the primary ion-ratio acceptance band, with 2002/657/EC sliding-scale fallback (&plusmn; 50 % when qualifier abundance is below 10 % of quantifier) applied at the LOQ boundary for IBMP and TCA where qualifier S/N drops below 5. Per-analyte ion ratios established on triplicate 50 ng/L standards are recorded in the method file as the reference value for each batch; routine batches are accepted only if ion ratio falls within the acceptance band.</p>
+  <p>SANTE/11312/2021 &plusmn; 30 % is adopted as the single ion-ratio acceptance band. The previous draft adopted a 2002/657/EC sliding-scale fallback at the LOQ boundary; this fallback is withdrawn after adversarial peer review (&sect;9.2) flagged it as the kind of looser-criterion-at-the-most-sensitive-boundary that institutionalizes false positives. The hard floor is qualifier S/N &ge; 3; below that, the analyte is reported as &lt; LOQ rather than accepted with a relaxed ion-ratio band. Per-analyte ion ratios established on triplicate standards at the validation mid-level are recorded in the method file as the reference value for each batch; routine batches are accepted only if ion ratio falls within &plusmn; 30 % of the reference value.</p>
 
   <p>TCA quantification additionally exploits the &sup3;&sup7;Cl-isotopologue confirmation: simultaneous monitoring of <span class="mono">210 &rarr; 195</span> and <span class="mono">212 &rarr; 197</span> produces a 1.00 to 0.32 (Cl<sub>3</sub> M+0 to M+2) isotope-ratio fingerprint that is essentially impossible to mimic by a non-chlorinated matrix interferent and is structurally more diagnostic than any single conventional qualifier ion.</p>
 </article>
 
-<!-- ====================== §7 VALIDATION ====================== -->
+<!-- ====================== §7 VALIDATION PROTOCOL ====================== -->
 <article class="chapter" id="validation">
   <p class="chapter-head"><span class="num">07</span> Chapter</p>
-  <h2 class="section-title">Method Validation</h2>
+  <h2 class="section-title">Method Validation Protocol</h2>
 
-  <p class="lead">Validation followed ICH Q2(R2) with supporting reference to AOAC SMPR, EURACHEM, OIV Annex E, and SANTE/11312/2021. Six analytes representative of each compound class were carried through full validation; the abbreviated panel was validated to single-level performance qualification.</p>
+  <aside class="note">
+    <span class="label">Provenance</span>
+    No instrument runs have been performed. This chapter describes the validation protocol that would generate the empirical performance numbers, the acceptance criteria each characteristic must meet, and the per-criterion experimental design. The previous draft of this chapter quoted illustrative LOQ/recovery/RSD numbers as if they were measurements; those numbers are withdrawn. The framework is ICH Q2(R2), with supporting reference to AOAC SMPR, EURACHEM &ldquo;Fitness for Purpose,&rdquo; OIV Annex E, and SANTE/11312/2021.
+  </aside>
 
-  <h3>7.1 Linearity</h3>
-  <p>Matrix-matched calibrants were prepared in stripped Cabernet Sauvignon (charcoal-treated, dealcoholized, then ethanol-reconstituted to 12 % v/v) at seven concentration levels per analyte, spanning two to three orders of magnitude around the typical Cabernet range. Calibrants were analyzed in triplicate. Linearity was assessed by coefficient of determination R², lack-of-fit F-test against quadratic model, and Mandel&rsquo;s fitting test. All six representative analytes had R² ≥ 0.99 across the calibrated range; Mandel&rsquo;s test rejected a quadratic improvement at &alpha; = 0.05 for all analytes &mdash; the linear fit is adequate.</p>
+  <p class="lead">Validation will follow ICH Q2(R2) on six analytes representative of each compound class &mdash; IBMP (methoxypyrazine), &beta;-damascenone (norisoprenoid), ethyl octanoate (ester), linalool (terpene), 4-ethylguaiacol (volatile phenol), TCA (haloanisole). The remaining twenty-four analytes in the panel will receive abbreviated single-level performance qualification (recovery within &plusmn; 20 % at one mid-range spike). Acceptance criteria are stated up front; failure to meet a criterion is a fail, not a basis for a relaxed re-interpretation.</p>
 
-  <h3>7.2 Limits of detection and quantification</h3>
-  <p>LOD and LOQ were estimated by three methods and the most conservative value retained: (i) S/N method on the lowest-spike replicate; (ii) ICH calibration method LOD = 3.3 &sigma;/S, LOQ = 10 &sigma;/S where &sigma; is the calibration intercept standard error and S is the slope; (iii) replicate-blank method LOD = mean<sub>blank</sub> + 3 SD<sub>blank</sub>. Per-analyte LOQ ranged from 0.1 ng/L (TCA, exploiting the &sup3;&sup7;Cl isotopologue confirmation to push the noise floor down) to 50 ng/L (IBMP at the low end of the calibration where the qualifier-ion S/N becomes limiting), with most analytes at LOQ between 5 and 20 ng/L.</p>
+  <h3>7.1 Linearity protocol</h3>
+  <p>Matrix-matched calibrants will be prepared in <strong>paired authentic Cabernet matrices</strong> (low-aroma young Cabernet for trace-level analytes, aged-Cabernet for application validation) at seven concentration levels per analyte, spanning two to three orders of magnitude around the typical Cabernet range. The previous draft used charcoal-stripped Cabernet (charcoal-treated, dealcoholized, then ethanol-reconstituted to 12 % v/v) as the validation matrix; that approach is withdrawn after &sect;9.2 surfaced the non-orthogonality of activated charcoal stripping to the lipophilic analytes the method quantifies. Each calibration level will be analyzed in triplicate. Linearity will be assessed by R&sup2;, lack-of-fit F-test against the quadratic model, and Mandel&rsquo;s fitting test. <strong>Acceptance:</strong> R&sup2; &ge; 0.99 and Mandel&rsquo;s test fails to reject the linear model at &alpha; = 0.05.</p>
+
+  <h3>7.2 Limits of detection and quantification protocol</h3>
+  <p>LOD and LOQ will be estimated by three methods and the most conservative value retained: (i) S/N method on the lowest-spike replicate; (ii) ICH calibration method LOD = 3.3 &sigma;/S, LOQ = 10 &sigma;/S where &sigma; is the calibration intercept standard error and S is the slope; (iii) replicate-blank method LOD = mean<sub>blank</sub> + 3 SD<sub>blank</sub>. Empirical confirmation at the LOQ level (six replicate spikes at the candidate LOQ, RSD &le; 20 % required) is mandatory before the LOQ value is committed.</p>
 
   <table>
-    <caption><strong>Table 7.1</strong> LOD, LOQ, linear range, and R² for the six representative analytes (matrix-matched calibration).</caption>
+    <caption><strong>Table 7.1</strong> Target LOQ regimes by analyte class. These are method-design targets driven by the sensory-threshold-to-LOQ ratio (typical target: LOQ &le; 0.1 &times; sensory threshold), not measurements. Empirical LOQ values pending experimental validation.</caption>
     <thead>
-      <tr><th>Analyte</th><th>LOD</th><th>LOQ</th><th>Linear range</th><th>R²</th><th>Mandel&rsquo;s F (p)</th></tr>
+      <tr><th>Analyte class</th><th>Sensory threshold range</th><th>Target LOQ</th><th>Driving constraint</th></tr>
     </thead>
     <tbody>
-      <tr><td>IBMP</td><td class="mono">15 ng/L</td><td class="mono">50 ng/L</td><td class="mono">50 &ndash; 5000 ng/L</td><td class="mono">0.998</td><td class="mono">F=0.42 (0.54)</td></tr>
-      <tr><td>β-damascenone</td><td class="mono">0.05 µg/L</td><td class="mono">0.15 µg/L</td><td class="mono">0.15 &ndash; 30 µg/L</td><td class="mono">0.996</td><td class="mono">F=1.21 (0.31)</td></tr>
-      <tr><td>Ethyl octanoate</td><td class="mono">10 µg/L</td><td class="mono">30 µg/L</td><td class="mono">30 &ndash; 6000 µg/L</td><td class="mono">0.999</td><td class="mono">F=0.18 (0.69)</td></tr>
-      <tr><td>Linalool</td><td class="mono">0.5 µg/L</td><td class="mono">1.5 µg/L</td><td class="mono">1.5 &ndash; 100 µg/L</td><td class="mono">0.994</td><td class="mono">F=2.04 (0.18)</td></tr>
-      <tr><td>4-ethylguaiacol</td><td class="mono">3 µg/L</td><td class="mono">10 µg/L</td><td class="mono">10 &ndash; 1500 µg/L</td><td class="mono">0.997</td><td class="mono">F=0.85 (0.39)</td></tr>
-      <tr><td>TCA</td><td class="mono">0.03 ng/L</td><td class="mono">0.10 ng/L</td><td class="mono">0.1 &ndash; 100 ng/L</td><td class="mono">0.995</td><td class="mono">F=1.50 (0.25)</td></tr>
+      <tr><td>Methoxypyrazines (IBMP, IPMP, SBMP)</td><td class="mono">1&ndash;15 ng/L</td><td class="mono">&le; 1 ng/L</td><td>qualifier S/N at lowest standard</td></tr>
+      <tr><td>C13 norisoprenoids (&beta;-damascenone, &beta;-ionone, TDN)</td><td class="mono">0.05&ndash;7 &micro;g/L</td><td class="mono">&le; 0.05 &micro;g/L</td><td>matrix interference at low end</td></tr>
+      <tr><td>Fermentation esters (ethyl hexanoate, octanoate, etc.)</td><td class="mono">2&ndash;30 &micro;g/L</td><td class="mono">&le; 1 &micro;g/L</td><td>well above LOQ; routine sensitivity</td></tr>
+      <tr><td>Monoterpenes (linalool, &alpha;-terpineol)</td><td class="mono">25&ndash;250 &micro;g/L</td><td class="mono">&le; 2 &micro;g/L</td><td>m/z 41/69/93 non-specificity in matrix</td></tr>
+      <tr><td>Smoke-taint phenols (guaiacol, 4-EG, syringol)</td><td class="mono">23&ndash;570 &micro;g/L</td><td class="mono">&le; 1 &micro;g/L</td><td>oak baseline (1&ndash;10 &micro;g/L) discrimination</td></tr>
+      <tr><td>Haloanisoles (TCA, TBA)</td><td class="mono">~50 ng/L red wine; 1&ndash;5 ng/L water/white</td><td class="mono">&le; 0.5 ng/L</td><td>forensic attribution at sub-threshold trace</td></tr>
+      <tr><td>Reductive sulfur (DMS, DMDS, 3MH)</td><td class="mono">25&ndash;100 &micro;g/L (DMS); 60 ng/L (3MH)</td><td class="mono">&le; 5 &micro;g/L (DMS); &le; 10 ng/L (3MH-PFB)</td><td>NCI mode required for thiol panel</td></tr>
     </tbody>
   </table>
 
-  <h3>7.3 Trueness (spike recovery)</h3>
-  <p>Three spike levels (low at 1.5× LOQ, mid at the geometric center of the working range, high at 80 % of upper linear range) were prepared in stripped Cabernet matrix and quantified against the matrix-matched calibration. Recovery across the six representative analytes spanned 86 % to 114 %, well within the &plusmn; 20 % acceptance band of AOAC SMPR for trace volatile analyses. The deuterium-labeled internal standards (d<sub>3</sub>-IBMP, d<sub>4</sub>-β-damascenone, d<sub>3</sub>-guaiacol, d<sub>5</sub>-TCA, d<sub>2</sub>-3MH) carried recovery within the &plusmn; 10 % band per ICH expectation for SIDA.</p>
+  <h3>7.3 Trueness (spike recovery) protocol</h3>
+  <p>Three spike levels &mdash; low at 1.5&times; LOQ, mid at the geometric center of the working range, high at 80 % of upper linear range &mdash; will be prepared in the paired-authentic matrix design (the same wines used for &sect;7.1 calibration; spike performed on a separate aliquot of each matrix-matched run). Recovery is calculated as (spiked&minus;unspiked) / nominal &times; 100 %. <strong>Acceptance:</strong> recovery within &plusmn; 20 % of nominal (AOAC SMPR for trace volatile analyses), with the deuterium-labeled internal standards (d<sub>3</sub>-IBMP, d<sub>4</sub>-&beta;-damascenone, d<sub>3</sub>-guaiacol, d<sub>5</sub>-TCA, d<sub>2</sub>-3MH) yielding recovery within &plusmn; 10 % per ICH expectation for SIDA. TDN, ethyl decanoate, and other analytes outside the SIDA budget will be flagged as &ldquo;recovery measured against matrix-matched calibration; isotope-correction not available&rdquo; &mdash; the &sect;9.2 acknowledged-weakness on the equilibrium-vs-isotope-dilution discipline applies.</p>
 
   <h3>7.4 Precision &mdash; repeatability and intermediate</h3>
-  <p>Repeatability (RSDr) was assessed by six replicate analyses of a mid-level spike in the same analytical run; intermediate precision (RSDR_intra) by 36 measurements across six days, two analysts, two SPME Arrows of the working sorbent. Repeatability RSDr ranged from 3.2 % (ethyl octanoate, well above LOQ) to 11.4 % (TCA at 0.5 ng/L, near LOQ). Intermediate precision RSDR ranged from 5.8 % to 14.6 %, all within the SANTE/11312/2021 acceptance band (≤ 20 %) and within the Horwitz prediction at the corresponding concentration. The HorRat_r ratio (observed RSD divided by Horwitz-predicted) ranged from 0.32 to 0.87, well within the 0.5 to 2.0 acceptance band of AOAC.</p>
+  <p>Repeatability (RSDr) will be measured by six replicate analyses of a mid-level spike in the same analytical run; intermediate precision (RSDR_intra) by 36 measurements across six days, two analysts, and a <strong>minimum of five Arrows drawn from at least two production lots</strong> of the working sorbent (the previous draft used two Arrows from one SKU; that design cannot estimate Arrow-lot variability and is withdrawn). <strong>Acceptance:</strong> RSDr &le; 15 % at mid-range, RSDR &le; 20 % at LOQ, HorRat_r within 0.5 to 2.0 (Horwitz-predicted RSD: <em>RSDR</em><sub>pred</sub> = 2<sup>1 &minus; 0.5 log<sub>10</sub> c</sup>).</p>
 
   <h3>7.5 Matrix effect</h3>
-  <p>Matrix effect was quantified by the slope-ratio test: calibration slopes determined in matrix-matched stripped Cabernet were divided by slopes determined in pure model wine. Slope ratios across the six representative analytes ranged from 0.85 (mild suppression at 4-EG, attributable to matrix tannin binding) to 1.18 (mild enhancement at IBMP, attributable to enrichment by the polyphenolic matrix). All values are within the acceptance band of 0.80 to 1.20 (Foods 2023 GC-MS/MS method-validation classification: &ldquo;medium suppression&rdquo; through &ldquo;medium enhancement&rdquo;). Quantification against the matrix-matched calibration (not the model-wine calibration) is therefore mandatory.</p>
+  <p>Matrix effect will be quantified by the slope-ratio test: calibration slopes determined in authentic Cabernet matrix will be divided by slopes determined in pure model wine (12 % ethanol / 5 g/L tartaric acid / pH 3.5). <strong>Acceptance:</strong> slope ratio within 0.80 to 1.20. Quantification against authentic-matrix calibration (not model-wine calibration) is mandatory for any analyte whose slope-ratio confidence interval excludes 1.0. A 95 % confidence band on the slope ratio will be reported; previous-draft point-estimates without CIs are insufficient.</p>
 
   <h3>7.6 Robustness</h3>
-  <p>A Youden 7-factor robustness design tested &plusmn; 5 % perturbations around the working method on extraction temperature, extraction time, NaCl mass, agitation rpm, incubation time, inlet temperature, and column flow rate. Eight runs covered the seven factors with seven dummy contrasts. No factor exhibited a significant (&alpha; = 0.05) effect on the geometric-mean response across the analyte panel; the method is robust to the routine instrument-to-instrument and analyst-to-analyst variation tested.</p>
+  <p>A Youden 7-factor robustness design will test <strong>&plusmn; 10 %</strong> perturbations around the working method on extraction temperature, extraction time, NaCl mass, agitation rpm, incubation time, inlet temperature, and column flow rate. Eight runs cover the seven factors with one dummy contrast. The previous draft used &plusmn; 5 %, which is within the equipment&rsquo;s own setpoint accuracy and pre-loads a &ldquo;no factor significant&rdquo; conclusion; &plusmn; 10 % is the EURACHEM minimum and is adopted here. <strong>Acceptance:</strong> no factor exceeds the Lenth-style significance threshold at &alpha; = 0.05 across the panel response.</p>
 
   <h3>7.7 Carryover</h3>
-  <p>Carryover was evaluated by analyzing a blank stripped-matrix sample immediately after the highest-concentration calibrant. Residual signal for each analyte was below 5 % of the LOQ signal &mdash; the SANTE/11312/2021 acceptance criterion. The Arrow conditioning at 270 &deg;C for 5 min between samples is the protocol that produces this carryover performance; longer conditioning produced no measurable further reduction.</p>
+  <p>Carryover will be evaluated by analyzing an <strong>authentic-wine blank</strong> (a known-low Cabernet, not stripped matrix) immediately after the highest-concentration calibrant, on each of the six validation days. <strong>Acceptance:</strong> residual signal &lt; 5 % of the LOQ signal per SANTE/11312/2021. The Arrow conditioning at 270 &deg;C for 5 min between samples is the protocol assumed to meet this; if the criterion fails, the conditioning time will be re-optimized empirically rather than the criterion relaxed.</p>
 
   <h3>7.8 Measurement uncertainty</h3>
-  <p>Top-down combined-standard uncertainty was estimated by the Nordtest approach:</p>
-  <p class="eqn">u<sub>c</sub>² = u<sub>Rw</sub>² + u<sub>bias</sub>² <span class="num">(7.1)</span></p>
-  <p>where <em>u<sub>Rw</sub></em> is intermediate-precision RSD (Table 7.2) and <em>u<sub>bias</sub></em> is the spike-recovery deviation from 100 %. For β-damascenone at the 1 µg/L level, <em>u<sub>Rw</sub></em> = 8.5 % and <em>u<sub>bias</sub></em> = 4.2 % giving <em>u<sub>c</sub></em> = 9.5 % and expanded uncertainty <em>U</em>(k=2) = 19 %. Comparable values for the rest of the panel are tabulated in Table 7.2; the worst-case expanded uncertainty (TCA at 0.3 ng/L) was 28 %, still well within the SANTE 50 % band at the LOQ boundary.</p>
+  <p>Top-down combined-standard uncertainty will be estimated per the Nordtest approach:</p>
+  <p class="eqn">u<sub>c</sub>&sup2; = u<sub>Rw</sub>&sup2; + u<sub>bias</sub>&sup2; <span class="num">(7.1)</span></p>
+  <p>where <em>u<sub>Rw</sub></em> is intermediate-precision RSD from &sect;7.4 and <em>u<sub>bias</sub></em> is the spike-recovery deviation from 100 % from &sect;7.3. Expanded uncertainty <em>U</em>(k=2) = 2 &middot; u<sub>c</sub> will be reported per analyte at the LOQ, mid-range, and high-spike levels. Acceptance is set by the analytical use-case rather than a fixed threshold: for cork-taint forensic attribution at the regulatory boundary, U(k=2) &lt; 30 % at LOQ is required; for routine appellation-discrimination work, U(k=2) &lt; 20 % at mid-range is sufficient.</p>
 </article>
 
-<!-- ====================== §8 RESULTS & DISCUSSION (with discord) ====================== -->
+<!-- ====================== §8 APPLICATION PROTOCOL ====================== -->
 <article class="chapter" id="results">
   <p class="chapter-head"><span class="num">08</span> Chapter</p>
-  <h2 class="section-title">Results and Discussion</h2>
+  <h2 class="section-title">Application Protocol &mdash; pending experimental data</h2>
 
-  <p class="lead">The validated method was applied to a thirty-bottle Cabernet Sauvignon panel from six regions, five vintages, and ten oak programs. The full quantitative aroma profile for each wine was input to a principal-component analysis (PCA) and orthogonal partial-least-squares discriminant analysis (OPLS-DA) to test the application-endpoint research question.</p>
+  <aside class="note">
+    <span class="label">Provenance</span>
+    No instrument runs have been performed. The previous draft of this chapter quoted illustrative panel results (30-wine OPLS-DA accuracy, VIP scores, vintage-discrimination claims) as if they were measurements; <strong>those numbers are withdrawn</strong>. This chapter is now the pre-registered protocol that would generate those results. The chromatogram fingerprint (Figure 8.1) is the panel of analytes the method covers, drawn as the composite of canonical NIST / literature relative intensities &mdash; not a measurement of any real wine.
+  </aside>
 
-  <h3>8.1 Quantitative aroma profile of the thirty-wine panel</h3>
-  <p>The full table of analyte concentrations (thirty wines × thirty analytes = 900 measurements, each in triplicate) is given in Supplementary Data S1. Mean concentrations and ranges across the panel are summarized in Table 8.1; concentrations span six orders of magnitude from TCA at 0.3 to 18 ng/L through methoxypyrazines at 5 to 95 ng/L through C13 norisoprenoids at 0.3 to 11 µg/L through fermentation esters at 50 to 6000 µg/L.</p>
+  <p class="lead">The application of the validated method (Chapters 4&ndash;7) to a structured Cabernet Sauvignon panel is the experimental work that converts the method scaffold from a literature artifact to a validated analytical procedure. This chapter specifies the panel composition, statistical pre-registration, and acceptance criteria that the experimental work must meet for the application claims (appellation discrimination, vintage discrimination, oak-program differentiation) to be defensible. The previous draft&rsquo;s n = 5 wines per appellation &times; 6 appellations design is withdrawn as statistically incoherent for OPLS-DA (see &sect;9.2 acknowledged weakness F2).</p>
+
+  <h3>8.1 Pre-registered panel composition</h3>
+  <p>The application panel will comprise <strong>n &ge; 30 wines per appellation</strong> across &ge; 4 appellations, stratified by vintage (covering at least three vintages per appellation) and oak program (American / French / mixed). Total panel size: n &ge; 120 wines. Each wine analyzed in <strong>independent triplicate from separate bottle aliquots</strong> (not analytical triplicate from one extraction, which collapses inter-bottle variance into the precision estimate). Wines are sourced by appellation-of-origin certificate, vintage label, and producer cooperage records; provenance documentation is filed as supplementary record before any chromatogram is acquired (pre-registration). Sample-handling chain-of-custody: bottles arrive cellar-temperature, are degassed under N<sub>2</sub>, aliquoted into the 20 mL HS vial with the internal-standard cocktail spiked first, capped, and queued for the autosampler within four hours of opening.</p>
 
   <!-- DISCORD: full-bleed fingerprint visualization -->
   <div class="fingerprint-bleed">
@@ -1473,22 +1699,28 @@
         <circle cx="780" cy="20" r="4" fill="url(#gradSU)"/><text x="790" y="23">sulfur / thiol</text>
       </g>
     </svg>
-    <p class="fpr-caption"><strong>Figure 8.1</strong> &nbsp; Composite quantitative aroma fingerprint of a representative Napa Cabernet Sauvignon, 2019 vintage. Peak heights are log-proportional to analyte concentration; peak positions reflect the dissertation method&rsquo;s DB-WAX UI elution sequence. Color encodes compound class. This figure exists because every chapter justified it: the method built across the previous seven chapters is what makes this composite possible.</p>
+    <p class="fpr-caption"><strong>Figure 8.1</strong> &nbsp; Illustrative composite of the analyte panel the method is designed to cover. Peak positions are the method&rsquo;s DB-WAX UI elution sequence; peak heights are scaled by the NIST 70 eV EI relative-intensity convention, not by measured concentration. <em>This figure is a panel-coverage diagram, not a chromatogram from a real injection.</em> Color encodes compound class.</p>
   </div>
 
-  <h3>8.2 Multivariate differentiation by appellation</h3>
-  <p>PCA on the standardized concentration matrix (thirty wines × thirty analytes) explained 62 % of total variance on the first two principal components: PC1 (38 %) loaded most heavily on β-damascenone, vanillin, and whisky-lactone (the oak-aging signature); PC2 (24 %) loaded on IBMP, 4-EG, and DMS (the varietal-and-fault signature). The score plot separated Napa and Coonawarra wines along PC1 (high oak signature) from Bordeaux and Maipo wines (lower oak signature, higher methoxypyrazine).</p>
-  <p>OPLS-DA with appellation as the supervised class (six classes: Napa, Bordeaux, Coonawarra, Maipo, Stellenbosch, Mendoza) classified the panel at 87 % cross-validated accuracy (leave-one-out). The top five VIP (variable-importance-in-projection) compounds were β-damascenone (VIP 1.92), cis-whisky-lactone (1.77), IBMP (1.61), vanillin (1.54), and 4-EG (1.31). The compounds the multivariate method selected as discriminating are precisely the compounds the dissertation method was built to measure quantitatively.</p>
+  <h3>8.2 Statistical pre-registration for the multivariate analysis</h3>
+  <p>The chemometric analysis will be pre-registered before any chromatogram is acquired. The full protocol:</p>
+  <ul>
+    <li><strong>Train / test split</strong>: 70 % of the panel (stratified by appellation and vintage) for model development; 30 % held out, untouched, until the model is locked.</li>
+    <li><strong>Inner-loop component selection</strong>: nested 10-fold CV on the training set selects the OPLS-DA component count and any preprocessing parameters. The outer loop estimates generalization. Leave-one-out CV is explicitly disallowed for this design (the previous draft&rsquo;s LOO on n = 30 was statistically incoherent &mdash; see &sect;9.2 F2).</li>
+    <li><strong>Permutation test on Q&sup2;</strong>: 1000 random label permutations; the model&rsquo;s Q&sup2; must exceed the 95 %-tile of the permuted-Q&sup2; distribution. Without this test, any reported OPLS-DA accuracy is overoptimistic.</li>
+    <li><strong>Bootstrap VIP confidence intervals</strong>: 1000 bootstrap resamples; report each VIP score with its 95 % CI. A compound is &ldquo;a discriminator&rdquo; only if the lower CI bound exceeds 1.0.</li>
+    <li><strong>Held-out test set</strong>: classification accuracy on the 30 %-held-out set is the primary endpoint. The training-set CV accuracy is reported but is not the headline number.</li>
+    <li><strong>Acceptance</strong>: held-out classification accuracy &gt; 60 % (chance level for four classes = 25 %) AND permutation Q&sup2; p &lt; 0.01. If both fail, the method does not support the appellation-discrimination claim and the panel needs to be larger or the analyte selection re-tuned.</li>
+  </ul>
 
-  <h3>8.3 Vintage discrimination</h3>
-  <p>Within Napa Cabernet (n = 5 wines spanning vintage 2017 through 2021), OPLS-DA on vintage achieved 80 % cross-validated accuracy with TDN, β-damascenone evolution, and the ester-to-acid hydrolysis index as the top discriminators. The TDN evolution is the expected Riesling-like aging signature; β-damascenone evolution is consistent with the published 1-to-2&times; increase reported in long-bottled Cabernet.</p>
+  <h3>8.3 Vintage-discrimination protocol</h3>
+  <p>Within each appellation, vintage discrimination requires the same statistical discipline as &sect;8.2 with the additional constraint that vintage is a continuous ordinal label, so OPLS-R (regression) rather than OPLS-DA is the natural model. Acceptance: leave-one-vintage-out cross-validated R&sup2; &gt; 0.5 on TDN, &beta;-damascenone, and the cis-/trans-whisky-lactone ratio as the candidate vintage markers. The previous draft&rsquo;s claim of &ldquo;80 % accuracy on n = 5 Napa wines spanning 5 vintages&rdquo; is withdrawn (one wine per vintage is one sample per class &mdash; not a chemometric result).</p>
 
-  <h3>8.4 Oak-program differentiation</h3>
-  <p>The American-versus-French oak distinction was resolved by the cis-/trans-whisky-lactone ratio: American-oak wines clustered at ratios above 1.5 (cis dominant), French-oak wines at ratios below 1.0 (trans dominant or balanced). Toast level was independently indexed by the furfural-to-vanillin ratio. New-versus-used oak was indexed by absolute total oak-lactone concentration. The three indices together placed each wine into a 2&times;3&times;2 = 12-cell oak-program space with sufficient resolution to differentiate 9 of the 10 oak programs in the panel.</p>
+  <h3>8.4 Oak-program differentiation protocol</h3>
+  <p>The American-versus-French oak distinction will be tested via the cis-/trans-whisky-lactone ratio (American oak typically &gt; 1.5; French oak typically &lt; 1.0). Toast level will be indexed by the furfural-to-vanillin ratio. New-versus-used oak will be indexed by absolute total oak-lactone concentration. The three indices together produce a 2&times;3&times;2 oak-program space; the application protocol requires representative coverage of all 12 cells in the panel (i.e., panel composition must be checked for oak-program balance before recruitment closes).</p>
 
-  <h3>8.5 Discussion — what the method can and cannot resolve</h3>
-  <p>The method resolves appellation, vintage (within appellation), and oak program at the precision the validated analytical performance supports. The method cannot, by itself, resolve viticultural source within an appellation (block, vineyard, rootstock) at this analyte panel; finer-grained source attribution would require either a more targeted panel (e.g., 1,8-cineole for site-specific contamination, methyl salicylate as a varietal marker) or a complementary stable-isotope-ratio dimension. The method also cannot infer Brettanomyces contamination as positive identification &mdash; 4-EP/4-EG concentrations only suggest Brett activity; species confirmation requires microbiological methodology.</p>
-  <p>The single most decisive performance gain over a fiber-SPME comparator was on the smoke-taint phenols, where the Arrow capacity advantage moved guaiacol and 4-methylguaiacol LOQ from 30 µg/L (fiber) to 5 µg/L (Arrow) — bringing both compounds well below the AWRI risk threshold of 20 µg/L for &ldquo;suspect&rdquo; classification. The TCA LOQ at 0.1 ng/L exploits the isotopologue confirmation rather than any fundamental sensitivity gain over fiber; the method&rsquo;s cork-taint discrimination is structurally sound either way.</p>
+  <h3>8.5 What the method cannot resolve, even with the application data in hand</h3>
+  <p>The method cannot resolve viticultural source within an appellation (block, vineyard, rootstock) at this analyte panel; finer-grained source attribution would require a more targeted panel (e.g., 1,8-cineole for site-specific contamination, methyl salicylate as a varietal marker) or a complementary stable-isotope-ratio dimension. The method cannot infer <em>Brettanomyces</em> contamination as positive identification &mdash; 4-EP / 4-EG concentrations only suggest Brett activity; species confirmation requires microbiological methodology. The method cannot distinguish &ldquo;currently smoke-affected&rdquo; from &ldquo;will become smoke-affected after aging&rdquo; without a glycoside-hydrolysis pre-step (an LC-MS/MS complement, out of scope here). The method&rsquo;s most decisive theoretical advantage over a fiber-SPME comparator is on the smoke-taint phenols (Arrow capacity advantage); whether that advantage translates into a measurable LOQ shift is itself an experimental question that the &sect;7 protocol will answer.</p>
 </article>
 
 <!-- ====================== §9 CONCLUSIONS ====================== -->
@@ -1496,21 +1728,43 @@
   <p class="chapter-head"><span class="num">09</span> Chapter</p>
   <h2 class="section-title">Conclusions</h2>
 
-  <p class="lead">The dissertation developed, optimized, validated, and applied a SPME Arrow headspace GC-MS/MS method for the quantitative profiling of aroma-active volatiles in Cabernet Sauvignon. All five research questions posed in §1.1 were resolved.</p>
+  <p class="lead">This dissertation produced a method-development scaffold for SPME Arrow headspace GC-MS/MS of Cabernet Sauvignon aroma volatiles. No instrument runs were performed. The scaffold integrates a ~250-paper literature corpus, six deep-research briefs, a 30-analyte MRM transition database, a Python toolkit (scheduled-MRM segment planner, DoE / RSM / Pawliszyn-isotherm / Setschenow fitters), and an adversarial peer review that surfaced four methodology weaknesses (catalogued in &sect;9.2 with their experimental remediation). The five research questions posed in &sect;1.1 are answered to the level the scaffold supports; the empirical components remain pending.</p>
 
   <ol>
-    <li><strong>SPME Arrow performance.</strong> The DVB/CWR/PDMS Arrow phase delivered a 3 to 10&times; sensitivity gain over a traditional 100 µm fiber across the Cabernet aroma panel, with sublinear scaling on the volume ratio confirming Pawliszyn&rsquo;s three-phase equilibrium model. The robustness advantage (~250 quantitative injections per Arrow versus ~75 per fiber) is a method-economics improvement of comparable magnitude to the sensitivity gain.</li>
-    <li><strong>Extraction kinetics.</strong> The methoxypyrazine, ester, and volatile-phenol clusters equilibrate within the 30 min sampling time at 95 % or better; TDN, ethyl decanoate, and the heavy norisoprenoids remain in pre-equilibrium at 30 min. Matched-time sampling with isotope-dilution internal standards absorbs the non-equilibrium bias to within the validated precision.</li>
-    <li><strong>MRM panel size.</strong> Thirty analytes plus five internal standards (72 unique transitions) fit a 47.3 min method across 37 acquisition segments at twelve points per peak; the upper limit on simultaneously schedulable transitions in this configuration is approximately 90 to 100 before PPP falls below 10 in the busiest segment.</li>
-    <li><strong>Validation.</strong> The method meets ICH Q2(R2) criteria across linearity (R² ≥ 0.99), LOQ (ng/L to µg/L per analyte class), recovery (86 to 114 %), precision (RSDR < 15 % at LOQ), matrix effect (slope ratio 0.85 to 1.18), robustness, and carryover. Measurement uncertainty <em>U</em>(k=2) ranged from 12 % (high-abundance esters) to 28 % (TCA at LOQ).</li>
-    <li><strong>Application.</strong> The method resolves appellation (87 % cross-validated accuracy), vintage within appellation (80 %), and oak-program (9 of 10 programs in the panel). The compounds selected by the OPLS-DA as discriminating are precisely the compounds the method was built to measure with quantitative authority.</li>
+    <li><strong>SPME Arrow sensitivity gain.</strong> The published literature reports a 1.5 to 10&times; sensitivity gain for SPME Arrow over traditional 100 &micro;m fiber across volatile-aroma compound classes (Kremser 2016 PAH benchmark; Welke 2024 wine head-to-head; Shimadzu PO-CON1702E wine Moscato comparison). The exact gain for the Cabernet aroma panel under the protocol described here remains an experimental question; the protocol&rsquo;s wider-than-default DoE range and the validation chapter&rsquo;s paired authentic-matrix comparison are designed to answer it.</li>
+    <li><strong>Extraction kinetics.</strong> Pawliszyn first-order isotherm fits applied to representative analytes (Table 5.2) suggest that the methoxypyrazine, ester, and volatile-phenol clusters reach &ge; 95 % equilibrium within 30 min sampling; TDN, ethyl decanoate, and the heavy norisoprenoids remain in pre-equilibrium at 30 min. Matched-time sampling with isotope-dilution internal standards absorbs the systematic bias <em>only for analytes covered by the SIDA budget</em>; TDN and ethyl decanoate are not, so the &sect;9.2 acknowledged weakness on isotope-dilution discipline applies (the &ldquo;equilibrium-pass&rdquo; from the previous draft is withdrawn).</li>
+    <li><strong>MRM panel size.</strong> Thirty analytes plus five internal standards (72 unique transitions) fit a 47.3 min method across 37 acquisition segments at twelve points per peak. The limiting segment has N<sub>concurrent</sub> = 10 transitions with dwell = 36.67 ms. The upper limit on simultaneously schedulable transitions in this configuration is approximately 90 to 100 before PPP falls below 10 in the busiest segment.</li>
+    <li><strong>Validation framework.</strong> The validation chapter (&sect;7) is now a protocol pending execution &mdash; not a set of measurements. ICH Q2(R2) is adopted as primary, with AOAC SMPR, EURACHEM, OIV Annex E, and SANTE/11312/2021 as supporting references. The 2002/657/EC ion-ratio fallback at the LOQ boundary is withdrawn after adversarial review; SANTE/11312/2021 &plusmn; 30 % with qualifier S/N &ge; 3 hard floor is the single acceptance criterion (&sect;9.2 F5).</li>
+    <li><strong>Application architecture.</strong> The application chapter (&sect;8) is a pre-registered experimental protocol pending data. The previous draft&rsquo;s n = 5-wines-per-appellation LOO OPLS-DA design is withdrawn (&sect;9.2 F2); the protocol now specifies n &ge; 30 wines per appellation, nested CV, permutation test on Q&sup2;, bootstrap VIP CI, and a held-out test set as the conditions for any defensible appellation-discrimination claim.</li>
   </ol>
 
-  <h3>9.1 Limitations</h3>
-  <p>The thirty-wine panel size is small for the regional-discrimination claim; replication across 100+ wines per region would strengthen the OPLS-DA result. The varietal-thiol channel (3MH) used a single-derivatization (PFB extractive alkylation) protocol; an LC-MS/MS comparator on the same wines would harden the trace-level results. Smoke-taint glycoside-bound forms are not captured by this method &mdash; an LC-MS/MS complement is required for any forensic attribution.</p>
+  <h3>9.1 Limitations &mdash; what this artifact is and is not</h3>
+  <p>This dissertation is a method-development scaffold, not a thesis with empirical results. It builds the analytical framework, the transition database, the optimization plan, the validation protocol, and the application architecture &mdash; but it does not run the instrument. Treat the artifact as the input to wet-lab work, not the output of it. The literature integration in &sect;3, the transition portfolio in &sect;6 and <code>MRM/transitions.yaml</code>, the cycle-time math in <code>code/mrm_optimizer.py</code>, and the DoE / RSM / isotherm / Setschenow toolkit in <code>code/spme_method_dev.py</code> are the publishable components. The reported &sect;5.4 isotherm table values, &sect;7 LOQ / recovery / RSD numbers, and &sect;8 OPLS-DA accuracies in earlier drafts of this document were illustrative and have been withdrawn from this version. Any number cited as a result anywhere in this dissertation that does not point to a specific cited paper is method-design intent, not measurement.</p>
 
-  <h3>9.2 Future work</h3>
-  <p>The natural extension paths are: a chemometric model trained on a larger panel to predict appellation from the quantitative aroma fingerprint with prediction-interval; the addition of a hydrolysis pre-step on a parallel sub-sample to quantify total (free + glycoside-bound) smoke-taint phenols; a comparative study against GC&times;GC-TOFMS to test whether the multidimensional separation produces an orthogonal signal beyond the MRM method&rsquo;s panel; and exploration of the new-generation ionic-liquid sorbent chemistries for Arrow that may open trace-level access to compound classes (notably the polyfunctional thiols) where the present DVB/CWR/PDMS phase is signal-limited.</p>
+  <h3>9.2 Acknowledged methodology weaknesses &mdash; from adversarial peer review</h3>
+  <p>The artifact was reviewed by <a href="https://github.com/ejmockler/brutalist-mcp" rel="noopener">brutalist-mcp</a> (Mockler) under the research-domain critique persona. The reviewer surfaced four methodological weaknesses that survive even with real experimental data &mdash; these are design decisions that cannot be patched in prose and must be addressed experimentally in any future execution of the protocol.</p>
+
+  <h4>F2 &mdash; OPLS-DA on a small panel is overfit by inspection</h4>
+  <p><strong>What was wrong.</strong> The previous draft&rsquo;s &sect;8.2 reported &ldquo;87 % cross-validated accuracy (leave-one-out)&rdquo; on a 30-wine &times; 30-analyte matrix with six appellation classes. Leave-one-out CV on small-n / high-feature / multi-class designs produces optimistic accuracy estimates because the supervised projection essentially memorizes the training data (Westerhuis et al., Triba et al.). The 87 % was uninterpretable even if the underlying chemistry had been measured.</p>
+  <p><strong>The remediation</strong> &mdash; now adopted in &sect;8.2: n &ge; 30 wines per appellation; nested CV with an inner loop selecting components and preprocessing parameters; 70/30 train/held-out split; 1000-permutation Q&sup2; test (p &lt; 0.01 required); bootstrap VIP confidence intervals; held-out test-set accuracy as the primary endpoint, not training-set CV.</p>
+
+  <h4>F3 &mdash; the RSM optimum sat at the design boundary</h4>
+  <p><strong>What was wrong.</strong> The &sect;5.3 composite-desirability optimum sat at NaCl = 4 g (the high end of the design space). The text acknowledged the boundary, then committed to it as the working method without confirming the response surface had turned over. An interior optimum cannot be claimed when the surface hasn&rsquo;t been verified to plateau or decrease past the design range. Rossi 2023 reported multimodal NaCl response surfaces on white wine &mdash; a documented risk the previous draft did not engage.</p>
+  <p><strong>The remediation</strong>: a face-centered CCD (<code>spme_method_dev.central_composite(face_centered=True)</code>) with NaCl axial points at 5.0 and 5.5 g; or a single-axis salt-titration experiment from 4 to saturation under fixed temperature and time. The decision on the working NaCl mass moves from the BBD output to the salt-titration plateau. Until that experiment is run, the working method&rsquo;s NaCl = 4 g is method-design intent, not a verified optimum.</p>
+
+  <h4>F4 &mdash; charcoal-stripped Cabernet matrix is not orthogonal to the analytes</h4>
+  <p><strong>What was wrong.</strong> The previous draft used activated-charcoal-treated, dealcoholized, ethanol-reconstituted Cabernet as the validation matrix. Activated charcoal preferentially adsorbs the lipophilic aromatic analytes (methoxypyrazines, C13 norisoprenoids, smoke-taint phenols) the method is designed to quantify (published in literature on charcoal-based wine fining). The matrix-effect slope-ratio measurement against a stripped matrix that has been preferentially depleted of the analytes confounds true matrix effect with differential analyte loss during stripping.</p>
+  <p><strong>The remediation</strong> &mdash; now adopted in &sect;7.1, &sect;7.5, &sect;7.7: paired authentic-Cabernet-matrix design. Use a known-low-aroma young Cabernet for trace-level calibration and a contrast-matrix aged Cabernet for application validation. Spike recovery is measured on the same matrix used for calibration; carryover is measured on an authentic blank, not stripped. The charcoal-strip route is withdrawn.</p>
+
+  <h4>F5 &mdash; the previous ion-ratio policy let failing qualifier ions through at the LOQ boundary</h4>
+  <p><strong>What was wrong.</strong> The previous &sect;6.5 policy was &ldquo;SANTE/11312/2021 &plusmn; 30 % primary, with 2002/657/EC sliding-scale fallback (&plusmn; 50 % when qualifier abundance &lt; 10 % of quantifier) at the LOQ boundary for IBMP and TCA where qualifier S/N drops below 5.&rdquo; SANTE/11312/2021 explicitly replaced the 2002/657/EC sliding scale because the scale was being abused at the trace boundary &mdash; the previous draft re-installed the abuse pattern under a &ldquo;fallback&rdquo; label, precisely at the concentration where false positives matter most.</p>
+  <p><strong>The remediation</strong> &mdash; now adopted in &sect;6.5: single ion-ratio acceptance band (SANTE/11312/2021 &plusmn; 30 %). Hard floor of qualifier S/N &ge; 3; below that, the analyte is reported &lt; LOQ rather than accepted with a relaxed band. For TCA specifically, the &sup3;&sup7;Cl isotopologue confirmation (210 &rarr; 195 AND 212 &rarr; 197 with 1.00 : 0.32 isotope ratio) is structurally more diagnostic than any conventional qualifier and is retained as the structural-fingerprint route at the LOQ boundary; the relaxed-band fallback is not.</p>
+
+  <h4>Other findings worth surfacing</h4>
+  <p>The brutalist review also flagged: (M2) the validation chapter&rsquo;s two-Arrow design cannot estimate Arrow-lot variability &mdash; now &sect;7.4 requires &ge; 5 Arrows from &ge; 2 production lots; (M3) the IBMP-artifact ceiling assumed at 60 &deg;C was never verified empirically &mdash; the protocol now includes a deuterium-IBMP control experiment to set the artifact threshold for the specific matrix; (M4) the smoke-taint method as built captures only free volatile phenols, not the glycoside-bound pool that hydrolyzes on aging &mdash; this is acknowledged in &sect;8.5 as an out-of-scope limitation requiring an LC-MS/MS complement; (M7) the previous draft&rsquo;s &plusmn; 5 % robustness perturbation was within the equipment&rsquo;s own setpoint accuracy &mdash; &sect;7.6 now adopts &plusmn; 10 % per EURACHEM minimum. The construction errors the review surfaced (impossible MRM transitions in the ester subchapter, the Kremser DOI hallucination, the TCA red-wine-vs-water threshold misattribution, the dwell-math worked-arithmetic mismatch) have been fixed in the underlying YAML, prose, and references; the audit log lives in the repository commit history.</p>
+
+  <h3>9.3 Future work</h3>
+  <p>The natural extension paths are: (a) wet-lab execution of the &sect;7 protocol with the &sect;9.2 remediations adopted, on a real Cabernet panel; (b) a chemometric model trained on the n &ge; 120 panel from &sect;8 to predict appellation from the quantitative aroma fingerprint with prediction interval; (c) the addition of a glycoside-hydrolysis pre-step on a parallel sub-sample to quantify total (free + glycoside-bound) smoke-taint phenols, with an LC-MS/MS complement; (d) a comparative study against GC&times;GC-TOFMS to test whether the multidimensional separation produces an orthogonal signal beyond the MRM method&rsquo;s panel; and (e) exploration of new-generation ionic-liquid sorbent chemistries for Arrow that may open trace-level access to compound classes (notably the polyfunctional thiols) where the present DVB/CWR/PDMS phase is signal-limited.</p>
 </article>
 
 <!-- ====================== §10 CODE LAB ====================== -->
@@ -1750,17 +2004,17 @@ def composite_desirability(individual_d, weights=None):
     <li>Kremser, A.; Jochmann, M. A.; Schmidt, T. C. <em>Anal. Bioanal. Chem.</em> <strong>2016</strong>, <em>408</em>, 943&ndash;952. PAL SPME Arrow comparison with classical SPME and SBSE. <a href="https://doi.org/10.1007/s00216-015-9187-z">10.1007/s00216-015-9187-z</a></li>
     <li>Helin, A.; Rönkkö, T.; Parshintsev, J.; Hartonen, K.; Schilling, B.; Läubli, T.; Riekkola, M.-L. <em>Anal. Bioanal. Chem.</em> <strong>2015</strong>, <em>407</em>, 5827&ndash;5837.</li>
     <li>Polášková, P.; Herszage, J.; Ebeler, S. E. <em>Chem. Soc. Rev.</em> <strong>2008</strong>, <em>37</em>, 2478&ndash;2489. <a href="https://doi.org/10.1039/B714455P">10.1039/B714455P</a></li>
-    <li>Ferreira, V.; López, R.; Cacho, J. F. <em>J. Agric. Food Chem.</em> <strong>2000</strong>, <em>48</em>, 1659&ndash;1664. <a href="https://doi.org/10.1021/jf990521l">10.1021/jf990521l</a></li>
+    <li>Ferreira, V.; López, R.; Cacho, J. F. <em>J. Sci. Food Agric.</em> <strong>2000</strong>, <em>80</em>, 1659&ndash;1667. Quantitative determination of the odorants of young red wines from different grape varieties. <a href="https://doi.org/10.1002/1097-0010(20000901)80:11%3C1659::AID-JSFA693%3E3.0.CO;2-6">10.1002/1097-0010(20000901)80:11&lt;1659::AID-JSFA693&gt;3.0.CO;2-6</a></li>
     <li>Câmara, J. S.; Alves, M. A.; Marques, J. C. <em>Anal. Chim. Acta</em> <strong>2006</strong>, <em>563</em>, 188&ndash;197.</li>
     <li>Allen, M. S.; Lacey, M. J.; Harris, R. L. N.; Brown, W. V. <em>Am. J. Enol. Vitic.</em> <strong>1991</strong>, <em>42</em>, 109&ndash;112.</li>
     <li>Lacey, M. J.; Allen, M. S.; Harris, R. L. N.; Brown, W. V. <em>Am. J. Enol. Vitic.</em> <strong>1991</strong>, <em>42</em>, 103&ndash;108.</li>
     <li>Tominaga, T.; Murat, M.-L.; Dubourdieu, D. <em>J. Agric. Food Chem.</em> <strong>1998</strong>, <em>46</em>, 1044&ndash;1048. <a href="https://doi.org/10.1021/jf970782o">10.1021/jf970782o</a></li>
     <li>Pollnitz, A. P.; Pardon, K. H.; Sefton, M. A. <em>Aust. J. Grape Wine Res.</em> <strong>1996</strong>, <em>2</em>, 92&ndash;96.</li>
-    <li>Kennison, K. R.; Wilkinson, K. L.; Williams, H. G.; Smith, J. H.; Gibberd, M. R. <em>J. Agric. Food Chem.</em> <strong>2007</strong>, <em>55</em>, 10897&ndash;10901. <a href="https://doi.org/10.1021/jf070662f">10.1021/jf070662f</a></li>
+    <li>Kennison, K. R.; Wilkinson, K. L.; Williams, H. G.; Smith, J. H.; Gibberd, M. R. <em>J. Agric. Food Chem.</em> <strong>2007</strong>, <em>55</em>, 10897&ndash;10901. <a href="https://doi.org/10.1021/jf072509k">10.1021/jf072509k</a></li>
     <li>Chatonnet, P.; Dubourdieu, D.; Boidron, J.-N.; Pons, M. <em>J. Sci. Food Agric.</em> <strong>1992</strong>, <em>60</em>, 165&ndash;178.</li>
     <li>Hjelmeland, A. K.; Wylie, P. L.; Ebeler, S. E. <em>Talanta</em> <strong>2013</strong>, <em>115</em>, 263&ndash;269.</li>
     <li>Slabizki, P.; Schmarr, H.-G. <em>Eur. Food Res. Technol.</em> <strong>2014</strong>, <em>239</em>, 549&ndash;558. <a href="https://doi.org/10.1007/s00217-014-2250-8">10.1007/s00217-014-2250-8</a></li>
-    <li>Schreier, P.; Wuest, M. <em>Anal. Bioanal. Chem.</em> <strong>2016</strong>, <em>408</em>, 7593&ndash;7602. <a href="https://doi.org/10.1007/s00216-016-9767-6">10.1007/s00216-016-9767-6</a></li>
+    <li>Langen, J.; Wegmann-Herr, P.; Schmarr, H.-G. <em>Anal. Bioanal. Chem.</em> <strong>2016</strong>, <em>408</em>, 6483&ndash;6496. Quantitative determination of &alpha;-ionone, &beta;-ionone, and &beta;-damascenone and enantiodifferentiation of &alpha;-ionone in wine for authenticity control using multidimensional gas chromatography with tandem mass spectrometric detection. <a href="https://doi.org/10.1007/s00216-016-9767-6">10.1007/s00216-016-9767-6</a></li>
     <li>Sacks, G. L.; Gates, M. J.; Ferry, F. X.; Lavin, E. H.; Kurtz, A. J.; Acree, T. E. <em>J. Agric. Food Chem.</em> <strong>2012</strong>, <em>60</em>, 2998&ndash;3004.</li>
     <li>Mateo-Vivaracho, L.; Cacho, J.; Ferreira, V. <em>J. Chromatogr. A</em> <strong>2008</strong>, <em>1185</em>, 9&ndash;18.</li>
     <li>Capone, D. L.; Barker, A.; Williamson, P. O.; Francis, I. L. <em>Anal. Chem.</em> <strong>2015</strong>, <em>87</em>, 1226&ndash;1231. <a href="https://doi.org/10.1021/ac503883s">10.1021/ac503883s</a></li>
