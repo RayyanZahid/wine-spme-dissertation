@@ -56,7 +56,7 @@ compounds:
     internal_standard: d3-IPMP
     transitions:
       - {precursor: 137, product: 124, ce_ev: 10, role: quan, source: "Slabizki/Schmarr 2014"}
-      - {precursor: 137, product: 152, ce_ev: 5, role: qual, source: "Hjelmeland 2010"}
+      - {precursor: 152, product: 137, ce_ev: 10, role: qual, source: "Slabizki/Schmarr 2014 (M+. -> loss of CH3)"}
 
   IBMP:
     name: 3-isobutyl-2-methoxypyrazine
@@ -186,9 +186,9 @@ compounds:
     cas: "87-40-1"
     rt: 19.0
     column: DB-5MS
-    threshold: 3
+    threshold: 50
     threshold_units: ng/L
-    threshold_note: "red wine threshold 1.4-4 ng/L"
+    threshold_note: "red wine olfactometry threshold ~50 ng/L (Cravero 2015 IntechOpen); 1-4 ng/L threshold in water; 3-5 ng/L in white wine. Method LOQ targets << threshold for forensic attribution."
     range_cabsauv: [0, 10]
     range_units: ng/L
     descriptor: "musty, wet cardboard, dank cellar"
@@ -404,8 +404,9 @@ compounds:
     marker_type: fermentation
     derivatization: none
     transitions:
-      - {precursor: 88, product: 60, ce_ev: 10, role: quan, source: "McLafferty NIST consensus"}
-      - {precursor: 88, product: 99, ce_ev: 5, role: qual, source: "Ester class consensus"}
+      # Q1 selects M+. (chain-length-specific); Q3 selects McLafferty m/z 88.
+      - {precursor: 144, product: 88, ce_ev: 10, role: quan, source: "NIST 70eV EI + ester McLafferty (M+. -> m/z 88)"}
+      - {precursor: 144, product: 99, ce_ev: 15, role: qual, source: "NIST alkyl-acylium [C5H11CO]+ from M+. loss of OEt"}
 
   ethyl-octanoate:
     name: ethyl octanoate (ethyl caprylate)
@@ -423,8 +424,8 @@ compounds:
     marker_type: fermentation
     derivatization: none
     transitions:
-      - {precursor: 88, product: 60, ce_ev: 10, role: quan, source: "McLafferty NIST consensus"}
-      - {precursor: 88, product: 127, ce_ev: 5, role: qual, source: "Ester class consensus"}
+      - {precursor: 172, product: 88, ce_ev: 10, role: quan, source: "NIST 70eV EI + ester McLafferty (M+. -> m/z 88)"}
+      - {precursor: 172, product: 127, ce_ev: 15, role: qual, source: "NIST alkyl-acylium [C7H15CO]+ from M+. loss of OEt"}
 
   ethyl-decanoate:
     name: ethyl decanoate (ethyl caprate)
@@ -440,8 +441,8 @@ compounds:
     marker_type: fermentation
     derivatization: none
     transitions:
-      - {precursor: 88, product: 60, ce_ev: 10, role: quan, source: "Ester class"}
-      - {precursor: 88, product: 155, ce_ev: 5, role: qual, source: "Ester class"}
+      - {precursor: 200, product: 88, ce_ev: 10, role: quan, source: "NIST 70eV EI + ester McLafferty (M+. -> m/z 88)"}
+      - {precursor: 200, product: 155, ce_ev: 15, role: qual, source: "NIST alkyl-acylium [C9H19CO]+ from M+. loss of OEt"}
 
   isoamyl-acetate:
     name: isoamyl acetate (3-methylbutyl acetate)
@@ -510,8 +511,8 @@ compounds:
     marker_type: fermentation
     derivatization: none
     transitions:
-      - {precursor: 104, product: 91, ce_ev: 10, role: quan, source: "NIST"}
-      - {precursor: 104, product: 105, ce_ev: 5, role: qual, source: "NIST"}
+      - {precursor: 104, product: 91, ce_ev: 10, role: quan, source: "NIST (ketene loss -> styrene -> tropylium m/z 91)"}
+      - {precursor: 164, product: 104, ce_ev: 5, role: qual, source: "NIST (M+. -> loss of ketene CH2=C=O)"}
 
   # ========== HIGHER ALCOHOLS ==========
 
