@@ -1,0 +1,127 @@
+segment_start_min,segment_end_min,compound,role,precursor_mz,product_mz,ce_ev,dwell_ms,source
+3.0,4.0,DMS,quan,62.0,47.0,10.0,203.33,Razaq 2023; Cucchiella 2024
+3.0,4.0,DMS,qual,62.0,45.0,15.0,203.33,Cucchiella 2024
+6.5,7.0,ethyl-butanoate,quan,88.0,60.0,10.0,203.33,NIST
+6.5,7.0,ethyl-butanoate,qual,88.0,71.0,10.0,203.33,NIST
+7.0,7.5,ethyl-butanoate,quan,88.0,60.0,10.0,99.17,NIST
+7.0,7.5,ethyl-butanoate,qual,88.0,71.0,10.0,99.17,NIST
+7.0,7.5,DMDS,quan,94.0,79.0,10.0,99.17,Cucchiella 2024
+7.0,7.5,DMDS,qual,94.0,45.0,15.0,99.17,Cucchiella 2024
+7.5,8.0,DMDS,quan,94.0,79.0,10.0,203.33,Cucchiella 2024
+7.5,8.0,DMDS,qual,94.0,45.0,15.0,203.33,Cucchiella 2024
+8.5,9.5,isoamyl-acetate,quan,70.0,43.0,10.0,203.33,NIST + Hjelmeland
+8.5,9.5,isoamyl-acetate,qual,87.0,43.0,5.0,203.33,NIST
+10.8,11.8,guaiacol,quan,124.0,109.0,15.0,203.33,Agilent 5994-3161EN; PMC7407152
+10.8,11.8,guaiacol,qual,124.0,81.0,20.0,203.33,Agilent; PMC7407152
+11.8,12.0,4-methylguaiacol,quan,138.0,123.0,15.0,203.33,Agilent; PMC7407152
+11.8,12.0,4-methylguaiacol,qual,138.0,95.0,20.0,203.33,Agilent; PMC7407152
+12.0,12.2,4-methylguaiacol,quan,138.0,123.0,15.0,64.44,Agilent; PMC7407152
+12.0,12.2,4-methylguaiacol,qual,138.0,95.0,20.0,64.44,Agilent; PMC7407152
+12.0,12.2,ethyl-hexanoate,quan,88.0,60.0,10.0,64.44,McLafferty NIST consensus
+12.0,12.2,ethyl-hexanoate,qual,88.0,99.0,5.0,64.44,Ester class consensus
+12.0,12.2,hexyl-acetate,quan,84.0,43.0,10.0,64.44,NIST; Lukić 2019
+12.0,12.2,hexyl-acetate,qual,84.0,56.0,10.0,64.44,NIST
+12.2,12.6,4-methylguaiacol,quan,138.0,123.0,15.0,47.08,Agilent; PMC7407152
+12.2,12.6,4-methylguaiacol,qual,138.0,95.0,20.0,47.08,Agilent; PMC7407152
+12.2,12.6,p-cresol,quan,108.0,107.0,15.0,47.08,PMC7407152
+12.2,12.6,p-cresol,qual,108.0,77.0,25.0,47.08,PMC7407152
+12.2,12.6,ethyl-hexanoate,quan,88.0,60.0,10.0,47.08,McLafferty NIST consensus
+12.2,12.6,ethyl-hexanoate,qual,88.0,99.0,5.0,47.08,Ester class consensus
+12.2,12.6,hexyl-acetate,quan,84.0,43.0,10.0,47.08,NIST; Lukić 2019
+12.2,12.6,hexyl-acetate,qual,84.0,56.0,10.0,47.08,NIST
+12.6,12.8,4-methylguaiacol,quan,138.0,123.0,15.0,36.67,Agilent; PMC7407152
+12.6,12.8,4-methylguaiacol,qual,138.0,95.0,20.0,36.67,Agilent; PMC7407152
+12.6,12.8,4-ethylguaiacol,quan,152.0,137.0,15.0,36.67,Agilent; PMC7407152
+12.6,12.8,4-ethylguaiacol,qual,152.0,122.0,20.0,36.67,Agilent; PMC7407152
+12.6,12.8,p-cresol,quan,108.0,107.0,15.0,36.67,PMC7407152
+12.6,12.8,p-cresol,qual,108.0,77.0,25.0,36.67,PMC7407152
+12.6,12.8,ethyl-hexanoate,quan,88.0,60.0,10.0,36.67,McLafferty NIST consensus
+12.6,12.8,ethyl-hexanoate,qual,88.0,99.0,5.0,36.67,Ester class consensus
+12.6,12.8,hexyl-acetate,quan,84.0,43.0,10.0,36.67,NIST; Lukić 2019
+12.6,12.8,hexyl-acetate,qual,84.0,56.0,10.0,36.67,NIST
+12.8,13.0,4-ethylguaiacol,quan,152.0,137.0,15.0,47.08,Agilent; PMC7407152
+12.8,13.0,4-ethylguaiacol,qual,152.0,122.0,20.0,47.08,Agilent; PMC7407152
+12.8,13.0,p-cresol,quan,108.0,107.0,15.0,47.08,PMC7407152
+12.8,13.0,p-cresol,qual,108.0,77.0,25.0,47.08,PMC7407152
+12.8,13.0,ethyl-hexanoate,quan,88.0,60.0,10.0,47.08,McLafferty NIST consensus
+12.8,13.0,ethyl-hexanoate,qual,88.0,99.0,5.0,47.08,Ester class consensus
+12.8,13.0,hexyl-acetate,quan,84.0,43.0,10.0,47.08,NIST; Lukić 2019
+12.8,13.0,hexyl-acetate,qual,84.0,56.0,10.0,47.08,NIST
+13.0,13.2,4-ethylguaiacol,quan,152.0,137.0,15.0,99.17,Agilent; PMC7407152
+13.0,13.2,4-ethylguaiacol,qual,152.0,122.0,20.0,99.17,Agilent; PMC7407152
+13.0,13.2,p-cresol,quan,108.0,107.0,15.0,99.17,PMC7407152
+13.0,13.2,p-cresol,qual,108.0,77.0,25.0,99.17,PMC7407152
+13.2,13.6,4-ethylguaiacol,quan,152.0,137.0,15.0,203.33,Agilent; PMC7407152
+13.2,13.6,4-ethylguaiacol,qual,152.0,122.0,20.0,203.33,Agilent; PMC7407152
+13.9,14.5,4-ethylphenol,quan,122.0,107.0,15.0,203.33,Agilent; PMC7407152
+13.9,14.5,4-ethylphenol,qual,122.0,77.0,25.0,203.33,Agilent; PMC7407152
+14.5,14.8,4-ethylphenol,quan,122.0,107.0,15.0,99.17,Agilent; PMC7407152
+14.5,14.8,4-ethylphenol,qual,122.0,77.0,25.0,99.17,Agilent; PMC7407152
+14.5,14.8,3MH,quan,134.0,100.0,5.0,99.17,Mateo-Vivaracho 2008/2010
+14.5,14.8,3MH,qual,134.0,67.0,10.0,99.17,Mateo-Vivaracho
+14.8,14.9,4-ethylphenol,quan,122.0,107.0,15.0,64.44,Agilent; PMC7407152
+14.8,14.9,4-ethylphenol,qual,122.0,77.0,25.0,64.44,Agilent; PMC7407152
+14.8,14.9,syringol,quan,154.0,139.0,15.0,64.44,Agilent; PMC7407152
+14.8,14.9,syringol,qual,154.0,124.0,20.0,64.44,Agilent; PMC7407152
+14.8,14.9,3MH,quan,134.0,100.0,5.0,64.44,Mateo-Vivaracho 2008/2010
+14.8,14.9,3MH,qual,134.0,67.0,10.0,64.44,Mateo-Vivaracho
+14.9,15.5,syringol,quan,154.0,139.0,15.0,99.17,Agilent; PMC7407152
+14.9,15.5,syringol,qual,154.0,124.0,20.0,99.17,Agilent; PMC7407152
+14.9,15.5,3MH,quan,134.0,100.0,5.0,99.17,Mateo-Vivaracho 2008/2010
+14.9,15.5,3MH,qual,134.0,67.0,10.0,99.17,Mateo-Vivaracho
+15.5,15.6,syringol,quan,154.0,139.0,15.0,203.33,Agilent; PMC7407152
+15.5,15.6,syringol,qual,154.0,124.0,20.0,203.33,Agilent; PMC7407152
+15.6,15.8,syringol,quan,154.0,139.0,15.0,99.17,Agilent; PMC7407152
+15.6,15.8,syringol,qual,154.0,124.0,20.0,99.17,Agilent; PMC7407152
+15.6,15.8,4-methylsyringol,quan,168.0,153.0,15.0,99.17,Agilent; PMC7407152
+15.6,15.8,4-methylsyringol,qual,168.0,125.0,20.0,99.17,Agilent; PMC7407152
+15.8,16.5,4-methylsyringol,quan,168.0,153.0,15.0,203.33,Agilent; PMC7407152
+15.8,16.5,4-methylsyringol,qual,168.0,125.0,20.0,203.33,Agilent; PMC7407152
+16.5,16.6,4-methylsyringol,quan,168.0,153.0,15.0,99.17,Agilent; PMC7407152
+16.5,16.6,4-methylsyringol,qual,168.0,125.0,20.0,99.17,Agilent; PMC7407152
+16.5,16.6,ethyl-octanoate,quan,88.0,60.0,10.0,99.17,McLafferty NIST consensus
+16.5,16.6,ethyl-octanoate,qual,88.0,127.0,5.0,99.17,Ester class consensus
+16.6,17.5,ethyl-octanoate,quan,88.0,60.0,10.0,203.33,McLafferty NIST consensus
+16.6,17.5,ethyl-octanoate,qual,88.0,127.0,5.0,203.33,Ester class consensus
+17.5,18.5,IPMP,quan,137.0,124.0,10.0,203.33,Slabizki/Schmarr 2014
+17.5,18.5,IPMP,qual,137.0,152.0,5.0,203.33,Hjelmeland 2010
+18.5,19.5,TCA,quan,210.0,195.0,15.0,64.44,Pollnitz 1996; Agilent 5990-4968EN
+18.5,19.5,TCA,isotope,212.0,197.0,15.0,64.44,Pollnitz 1996
+18.5,19.5,TCA,qual,210.0,167.0,25.0,64.44,Agilent 5990-4968EN
+18.5,19.5,linalool,quan,93.0,41.0,10.0,64.44,NIST; Lukić 2019; Vichi 2007
+18.5,19.5,linalool,qual,93.0,69.0,15.0,64.44,NIST
+18.5,19.5,linalool,confirm,121.0,93.0,10.0,64.44,NIST
+19.5,20.5,2-MIB,quan,95.0,67.0,15.0,203.33,Agilent 5991-1031EN
+19.5,20.5,2-MIB,qual,108.0,95.0,5.0,203.33,Agilent 5991-1031EN
+20.5,21.5,SBMP,quan,138.0,124.0,10.0,203.33,Slabizki/Schmarr 2014
+20.5,21.5,SBMP,qual,138.0,123.0,10.0,203.33,Slabizki/Schmarr 2014
+21.5,22.5,IBMP,quan,124.0,94.0,15.0,99.17,Hjelmeland 2010; Allamy 2018
+21.5,22.5,IBMP,qual,124.0,81.0,20.0,99.17,Schmarr; Antalick
+21.5,22.5,ethyl-decanoate,quan,88.0,60.0,10.0,99.17,Ester class
+21.5,22.5,ethyl-decanoate,qual,88.0,155.0,5.0,99.17,Ester class
+22.5,23.5,TBA,quan,346.0,331.0,15.0,99.17,Ebeler 2012 AJEV
+22.5,23.5,TBA,qual,346.0,329.0,15.0,99.17,Ebeler 2012
+22.5,23.5,alpha-terpineol,quan,121.0,93.0,10.0,99.17,NIST consensus
+22.5,23.5,alpha-terpineol,qual,121.0,81.0,15.0,99.17,NIST
+23.5,24.5,geosmin,quan,112.0,97.0,10.0,203.33,Agilent 5991-1031EN
+23.5,24.5,geosmin,qual,182.0,112.0,10.0,203.33,Agilent 5991-1031EN
+24.5,25.5,2-phenylethanol,quan,91.0,65.0,15.0,203.33,NIST; Razaq 2023
+24.5,25.5,2-phenylethanol,qual,122.0,91.0,10.0,203.33,NIST
+26.5,27.5,TDN,quan,172.0,157.0,15.0,203.33,Sacks 2012 JAFC; AWRI
+26.5,27.5,TDN,qual,172.0,142.0,20.0,203.33,AWRI
+27.5,28.5,beta-damascenone,quan,190.0,121.0,10.0,78.33,Schreier/Wuest 2016 ABC
+27.5,28.5,beta-damascenone,qual,190.0,105.0,12.0,78.33,Schreier/Wuest 2016
+27.5,28.5,beta-damascenone,confirm,190.0,69.0,15.0,78.33,Schreier/Wuest 2016
+27.5,28.5,2-phenethyl-acetate,quan,104.0,91.0,10.0,78.33,NIST
+27.5,28.5,2-phenethyl-acetate,qual,104.0,105.0,5.0,78.33,NIST
+29.5,30.5,alpha-ionone,quan,192.0,177.0,10.0,99.17,Schreier/Wuest 2016
+29.5,30.5,alpha-ionone,qual,192.0,121.0,15.0,99.17,Schreier/Wuest 2016
+29.5,30.5,sotolon,quan,129.0,55.0,15.0,99.17,Foods 2019 PMC6311786
+29.5,30.5,sotolon,qual,129.0,83.0,15.0,99.17,Foods 2019
+31.5,32.5,beta-ionone,quan,192.0,177.0,12.0,203.33,Schreier/Wuest 2016
+31.5,32.5,beta-ionone,qual,192.0,91.0,20.0,203.33,Schreier/Wuest 2016
+36.7,37.7,hexanal-PFBHA,quan,181.0,161.0,15.0,203.33,Razaq 2023 JAFC
+36.7,37.7,hexanal-PFBHA,qual,239.0,181.0,15.0,203.33,Razaq 2023
+43.1,44.1,methional-PFBHA,quan,252.0,181.0,10.0,411.67,Razaq 2023
+49.3,50.3,phenylacetaldehyde-PFBHA,quan,181.0,161.0,5.0,203.33,Razaq 2023
+49.3,50.3,phenylacetaldehyde-PFBHA,qual,91.0,65.0,15.0,203.33,Razaq 2023

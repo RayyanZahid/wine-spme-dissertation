@@ -1,0 +1,18 @@
+  topic: wine-spme-gcms
+  papers in snapshot: 40  cached cards: 0  to extract: 40
+  [1-8/40] calling claude -p (claude-opus-4-7)...
+    !! timeout: timed out after 240s
+  [9-16/40] calling claude -p (claude-opus-4-7)...
+    !! transient: exit 3221226505: 
+  [17-24/40] calling claude -p (claude-opus-4-7)...
+    + 8 cards persisted
+  [25-32/40] calling claude -p (claude-opus-4-7)...
+    + 8 cards persisted
+  [33-40/40] calling claude -p (claude-opus-4-7)...
+    + 8 cards persisted
+
+distill summary for wine-spme-gcms:
+  extracted this run: 24
+  cached (skipped):   0
+  total cards:        24
+  !! 2 batch failures (see telemetry)

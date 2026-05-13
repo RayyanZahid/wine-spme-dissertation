@@ -1,0 +1,9 @@
+run,extraction_temperature_C,extraction_time_min,NaCl_mass_g,sample_volume_mL,ethanol_dilution,agitation_rpm,incubation_time_min
+1,60,60,4.0,5,5,250,5
+2,30,60,4.0,10,0,500,5
+3,30,15,4.0,10,5,250,15
+4,60,15,0.5,10,5,500,5
+5,30,60,0.5,5,5,500,15
+6,60,15,4.0,5,0,500,15
+7,60,60,0.5,10,0,250,15
+8,30,15,0.5,5,0,250,5

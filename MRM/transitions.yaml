@@ -1,0 +1,703 @@
+# Wine SPME Arrow GC-MS/MS — MRM Transition Database
+#
+# Source: extracted from _research/04_mrm_optimization.md, cross-validated against
+# Agilent 5994-3161EN, Agilent 5990-4968EN, Agilent 5991-3682EN, Agilent 5991-1031EN,
+# Thermo TSQ AppsLab #4532, PMC7407152, Razaq 2023 (PMC10835727),
+# Schreier & Wuest 2016 ABC, Pollnitz 1996, Hjelmeland 2010, Slabizki & Schmarr 2014.
+#
+# Schema per compound:
+#   name        — common name
+#   class       — methoxypyrazine | norisoprenoid | haloanisole | smoke_phenol |
+#                 monoterpene | ester | higher_alcohol | aldehyde |
+#                 musty | sulfur | oxidative
+#   formula     — molecular formula
+#   mw          — molecular weight (Da)
+#   cas         — CAS number
+#   rt          — retention time estimate (min, on DB-WAX 60m unless noted)
+#   column      — DB-WAX | DB-5MS | DB-5
+#   transitions — list of {precursor, product, ce_ev, role, source}
+#                 role: quan | qual | confirm | isotope
+#   matrix      — wine | water | solvent_only (for threshold/range entries)
+#   threshold   — sensory threshold in wine, in same units as range (ng/L | µg/L | mg/L)
+#   threshold_units
+#   range_cabsauv — typical concentration range reported in Cabernet Sauvignon
+#   range_units
+#   descriptor  — odor descriptor (e.g., "green pepper", "raspberry-jam")
+#   marker_type — varietal | fermentation | fault | smoke_taint | brett | oak
+#   derivatization — none | PFBHA | PFB-extractive-alkylation | DTDP
+#   internal_standard — recommended IS for SIDA quan
+#
+# This is the authoritative analyte panel for the dissertation MRM method.
+
+version: 1
+adopted_2026_05_12: true
+default_acceptance: "SANTE/11312/2021 ±30%"
+fallback_acceptance: "2002/657/EC sliding scale (±50% when Q<10% of Quan)"
+
+compounds:
+
+  # ========== METHOXYPYRAZINES (vegetal / green-pepper markers) ==========
+
+  IPMP:
+    name: 3-isopropyl-2-methoxypyrazine
+    class: methoxypyrazine
+    formula: C8H12N2O
+    mw: 152.19
+    cas: "25773-40-4"
+    rt: 18.0
+    column: DB-WAX
+    threshold: 2
+    threshold_units: ng/L
+    range_cabsauv: [0, 6]
+    range_units: ng/L
+    descriptor: "green pea, asparagus, earthy"
+    marker_type: varietal
+    derivatization: none
+    internal_standard: d3-IPMP
+    transitions:
+      - {precursor: 137, product: 124, ce_ev: 10, role: quan, source: "Slabizki/Schmarr 2014"}
+      - {precursor: 137, product: 152, ce_ev: 5, role: qual, source: "Hjelmeland 2010"}
+
+  IBMP:
+    name: 3-isobutyl-2-methoxypyrazine
+    class: methoxypyrazine
+    formula: C9H14N2O
+    mw: 166.22
+    cas: "24683-00-9"
+    rt: 22.0
+    column: DB-WAX
+    threshold: 15
+    threshold_units: ng/L
+    range_cabsauv: [1, 50]
+    range_units: ng/L
+    descriptor: "green bell pepper, capsicum"
+    marker_type: varietal
+    derivatization: none
+    internal_standard: d3-IBMP
+    transitions:
+      - {precursor: 124, product: 94, ce_ev: 15, role: quan, source: "Hjelmeland 2010; Allamy 2018"}
+      - {precursor: 124, product: 81, ce_ev: 20, role: qual, source: "Schmarr; Antalick"}
+
+  SBMP:
+    name: 3-sec-butyl-2-methoxypyrazine
+    class: methoxypyrazine
+    formula: C9H14N2O
+    mw: 166.22
+    cas: "24168-70-5"
+    rt: 21.0
+    column: DB-WAX
+    threshold: 1
+    threshold_units: ng/L
+    range_cabsauv: [0, 3]
+    range_units: ng/L
+    descriptor: "pea, herbaceous"
+    marker_type: varietal
+    derivatization: none
+    transitions:
+      - {precursor: 138, product: 124, ce_ev: 10, role: quan, source: "Slabizki/Schmarr 2014"}
+      - {precursor: 138, product: 123, ce_ev: 10, role: qual, source: "Slabizki/Schmarr 2014"}
+
+  # ========== NORISOPRENOIDS (carotenoid-derived aging markers) ==========
+
+  beta-damascenone:
+    name: beta-damascenone
+    class: norisoprenoid
+    formula: C13H18O
+    mw: 190.28
+    cas: "23696-85-7"
+    rt: 28.0
+    column: DB-WAX
+    threshold: 0.05
+    threshold_units: µg/L
+    threshold_note: "hydroalcoholic 0.05; red wine matrix 4-7 µg/L"
+    range_cabsauv: [1, 10]
+    range_units: µg/L
+    descriptor: "stewed apple, raspberry jam, plum compote"
+    marker_type: fermentation
+    derivatization: none
+    internal_standard: d4-damascenone
+    transitions:
+      - {precursor: 190, product: 121, ce_ev: 10, role: quan, source: "Schreier/Wuest 2016 ABC"}
+      - {precursor: 190, product: 105, ce_ev: 12, role: qual, source: "Schreier/Wuest 2016"}
+      - {precursor: 190, product: 69, ce_ev: 15, role: confirm, source: "Schreier/Wuest 2016"}
+
+  beta-ionone:
+    name: beta-ionone
+    class: norisoprenoid
+    formula: C13H20O
+    mw: 192.30
+    cas: "14901-07-6"
+    rt: 32.0
+    column: DB-WAX
+    threshold: 0.09
+    threshold_units: µg/L
+    range_cabsauv: [0.05, 1.0]
+    range_units: µg/L
+    descriptor: "violet, raspberry, woody"
+    marker_type: varietal
+    derivatization: none
+    transitions:
+      - {precursor: 192, product: 177, ce_ev: 12, role: quan, source: "Schreier/Wuest 2016"}
+      - {precursor: 192, product: 91, ce_ev: 20, role: qual, source: "Schreier/Wuest 2016"}
+
+  alpha-ionone:
+    name: alpha-ionone
+    class: norisoprenoid
+    formula: C13H20O
+    mw: 192.30
+    cas: "127-41-3"
+    rt: 30.0
+    column: DB-WAX
+    threshold: 2.6
+    threshold_units: µg/L
+    descriptor: "violet, fruity"
+    marker_type: varietal
+    derivatization: none
+    transitions:
+      - {precursor: 192, product: 177, ce_ev: 10, role: quan, source: "Schreier/Wuest 2016"}
+      - {precursor: 192, product: 121, ce_ev: 15, role: qual, source: "Schreier/Wuest 2016"}
+
+  TDN:
+    name: 1,1,6-trimethyl-1,2-dihydronaphthalene
+    class: norisoprenoid
+    formula: C13H16
+    mw: 172.27
+    cas: "30364-38-6"
+    rt: 27.0
+    column: DB-WAX
+    threshold: 4
+    threshold_units: µg/L
+    range_cabsauv: [0.5, 2.5]
+    range_units: µg/L
+    descriptor: "kerosene, petrol (aged Riesling marker; trace in aged Cab)"
+    marker_type: oak
+    derivatization: none
+    transitions:
+      - {precursor: 172, product: 157, ce_ev: 15, role: quan, source: "Sacks 2012 JAFC; AWRI"}
+      - {precursor: 172, product: 142, ce_ev: 20, role: qual, source: "AWRI"}
+
+  # ========== HALOANISOLES (cork-taint markers) ==========
+
+  TCA:
+    name: 2,4,6-trichloroanisole
+    class: haloanisole
+    formula: C7H5Cl3O
+    mw: 211.47
+    cas: "87-40-1"
+    rt: 19.0
+    column: DB-5MS
+    threshold: 3
+    threshold_units: ng/L
+    threshold_note: "red wine threshold 1.4-4 ng/L"
+    range_cabsauv: [0, 10]
+    range_units: ng/L
+    descriptor: "musty, wet cardboard, dank cellar"
+    marker_type: fault
+    derivatization: none
+    internal_standard: d5-TCA
+    transitions:
+      - {precursor: 210, product: 195, ce_ev: 15, role: quan, source: "Pollnitz 1996; Agilent 5990-4968EN"}
+      - {precursor: 212, product: 197, ce_ev: 15, role: isotope, source: "Pollnitz 1996"}
+      - {precursor: 210, product: 167, ce_ev: 25, role: qual, source: "Agilent 5990-4968EN"}
+
+  TBA:
+    name: 2,4,6-tribromoanisole
+    class: haloanisole
+    formula: C7H5Br3O
+    mw: 344.83
+    cas: "607-99-8"
+    rt: 23.0
+    column: DB-5MS
+    threshold: 8
+    threshold_units: ng/L
+    descriptor: "musty (alternative to TCA)"
+    marker_type: fault
+    derivatization: none
+    transitions:
+      - {precursor: 346, product: 331, ce_ev: 15, role: quan, source: "Ebeler 2012 AJEV"}
+      - {precursor: 346, product: 329, ce_ev: 15, role: qual, source: "Ebeler 2012"}
+
+  # ========== SMOKE-TAINT VOLATILE PHENOLS ==========
+
+  guaiacol:
+    name: guaiacol (2-methoxyphenol)
+    class: smoke_phenol
+    formula: C7H8O2
+    mw: 124.14
+    cas: "90-05-1"
+    rt: 11.3
+    column: DB-WAX
+    threshold: 23
+    threshold_units: µg/L
+    range_cabsauv: [1, 50]
+    range_cabsauv_note: "1-10 µg/L from oak alone; up to 50+ µg/L in smoke-affected"
+    range_units: µg/L
+    descriptor: "smoky, medicinal, ashy"
+    marker_type: smoke_taint
+    derivatization: none
+    internal_standard: d3-guaiacol
+    transitions:
+      - {precursor: 124, product: 109, ce_ev: 15, role: quan, source: "Agilent 5994-3161EN; PMC7407152"}
+      - {precursor: 124, product: 81, ce_ev: 20, role: qual, source: "Agilent; PMC7407152"}
+
+  4-methylguaiacol:
+    name: 4-methylguaiacol (creosol)
+    class: smoke_phenol
+    formula: C8H10O2
+    mw: 138.16
+    cas: "93-51-6"
+    rt: 12.3
+    column: DB-WAX
+    threshold: 65
+    threshold_units: µg/L
+    descriptor: "smoky, spicy, clove-like"
+    marker_type: smoke_taint
+    derivatization: none
+    transitions:
+      - {precursor: 138, product: 123, ce_ev: 15, role: quan, source: "Agilent; PMC7407152"}
+      - {precursor: 138, product: 95, ce_ev: 20, role: qual, source: "Agilent; PMC7407152"}
+
+  4-ethylguaiacol:
+    name: 4-ethylguaiacol
+    class: smoke_phenol
+    formula: C9H12O2
+    mw: 152.19
+    cas: "2785-89-9"
+    rt: 13.1
+    column: DB-WAX
+    threshold: 158
+    threshold_units: µg/L
+    threshold_note: "AWRI 158 µg/L; Chatonnet 1992 436 µg/L"
+    range_cabsauv: [10, 600]
+    range_units: µg/L
+    descriptor: "smoky-medicinal, spicy (also Brett marker)"
+    marker_type: brett
+    derivatization: none
+    transitions:
+      - {precursor: 152, product: 137, ce_ev: 15, role: quan, source: "Agilent; PMC7407152"}
+      - {precursor: 152, product: 122, ce_ev: 20, role: qual, source: "Agilent; PMC7407152"}
+
+  4-ethylphenol:
+    name: 4-ethylphenol
+    class: smoke_phenol
+    formula: C8H10O
+    mw: 122.16
+    cas: "123-07-9"
+    rt: 14.4
+    column: DB-WAX
+    threshold: 605
+    threshold_units: µg/L
+    range_cabsauv: [10, 5000]
+    range_units: µg/L
+    descriptor: "horse, leather, barnyard, medicinal (Brett marker)"
+    marker_type: brett
+    derivatization: none
+    transitions:
+      - {precursor: 122, product: 107, ce_ev: 15, role: quan, source: "Agilent; PMC7407152"}
+      - {precursor: 122, product: 77, ce_ev: 25, role: qual, source: "Agilent; PMC7407152"}
+
+  syringol:
+    name: syringol (2,6-dimethoxyphenol)
+    class: smoke_phenol
+    formula: C8H10O3
+    mw: 154.16
+    cas: "91-10-1"
+    rt: 15.3
+    column: DB-WAX
+    threshold: 570
+    threshold_units: µg/L
+    descriptor: "smoky, woody, oak-related"
+    marker_type: smoke_taint
+    derivatization: none
+    transitions:
+      - {precursor: 154, product: 139, ce_ev: 15, role: quan, source: "Agilent; PMC7407152"}
+      - {precursor: 154, product: 124, ce_ev: 20, role: qual, source: "Agilent; PMC7407152"}
+
+  4-methylsyringol:
+    name: 4-methylsyringol
+    class: smoke_phenol
+    formula: C9H12O3
+    mw: 168.19
+    cas: "6638-05-7"
+    rt: 16.1
+    column: DB-WAX
+    threshold: 530
+    threshold_units: µg/L
+    descriptor: "smoky-spicy"
+    marker_type: smoke_taint
+    derivatization: none
+    transitions:
+      - {precursor: 168, product: 153, ce_ev: 15, role: quan, source: "Agilent; PMC7407152"}
+      - {precursor: 168, product: 125, ce_ev: 20, role: qual, source: "Agilent; PMC7407152"}
+
+  p-cresol:
+    name: para-cresol (4-methylphenol)
+    class: smoke_phenol
+    formula: C7H8O
+    mw: 108.14
+    cas: "106-44-5"
+    rt: 12.7
+    column: DB-WAX
+    threshold: 64
+    threshold_units: µg/L
+    descriptor: "phenolic, plastic-like"
+    marker_type: smoke_taint
+    derivatization: none
+    transitions:
+      - {precursor: 108, product: 107, ce_ev: 15, role: quan, source: "PMC7407152"}
+      - {precursor: 108, product: 77, ce_ev: 25, role: qual, source: "PMC7407152"}
+
+  # ========== MONOTERPENES (Cab Sauv background) ==========
+
+  linalool:
+    name: linalool
+    class: monoterpene
+    formula: C10H18O
+    mw: 154.25
+    cas: "78-70-6"
+    rt: 19.0
+    column: DB-WAX
+    threshold: 25
+    threshold_units: µg/L
+    range_cabsauv: [0, 20]
+    range_units: µg/L
+    descriptor: "floral, rose, citrus"
+    marker_type: varietal
+    derivatization: none
+    transitions:
+      - {precursor: 93, product: 41, ce_ev: 10, role: quan, source: "NIST; Lukić 2019; Vichi 2007"}
+      - {precursor: 93, product: 69, ce_ev: 15, role: qual, source: "NIST"}
+      - {precursor: 121, product: 93, ce_ev: 10, role: confirm, source: "NIST"}
+
+  alpha-terpineol:
+    name: alpha-terpineol
+    class: monoterpene
+    formula: C10H18O
+    mw: 154.25
+    cas: "98-55-5"
+    rt: 23.0
+    column: DB-WAX
+    threshold: 250
+    threshold_units: µg/L
+    descriptor: "pine, lilac, woody"
+    marker_type: varietal
+    derivatization: none
+    transitions:
+      - {precursor: 121, product: 93, ce_ev: 10, role: quan, source: "NIST consensus"}
+      - {precursor: 121, product: 81, ce_ev: 15, role: qual, source: "NIST"}
+
+  # ========== ESTERS (yeast-derived fruit volatiles) ==========
+
+  ethyl-hexanoate:
+    name: ethyl hexanoate (ethyl caproate)
+    class: ester
+    formula: C8H16O2
+    mw: 144.21
+    cas: "123-66-0"
+    rt: 12.5
+    column: DB-WAX
+    threshold: 5
+    threshold_units: µg/L
+    range_cabsauv: [289, 4107]
+    range_units: µg/L
+    descriptor: "green apple, banana, brandy"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 88, product: 60, ce_ev: 10, role: quan, source: "McLafferty NIST consensus"}
+      - {precursor: 88, product: 99, ce_ev: 5, role: qual, source: "Ester class consensus"}
+
+  ethyl-octanoate:
+    name: ethyl octanoate (ethyl caprylate)
+    class: ester
+    formula: C10H20O2
+    mw: 172.27
+    cas: "106-32-1"
+    rt: 17.0
+    column: DB-WAX
+    threshold: 2
+    threshold_units: µg/L
+    range_cabsauv: [346, 5108]
+    range_units: µg/L
+    descriptor: "pear, sweet, soap"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 88, product: 60, ce_ev: 10, role: quan, source: "McLafferty NIST consensus"}
+      - {precursor: 88, product: 127, ce_ev: 5, role: qual, source: "Ester class consensus"}
+
+  ethyl-decanoate:
+    name: ethyl decanoate (ethyl caprate)
+    class: ester
+    formula: C12H24O2
+    mw: 200.32
+    cas: "110-38-3"
+    rt: 22.0
+    column: DB-WAX
+    threshold: 200
+    threshold_units: µg/L
+    descriptor: "soap, wax, fruity"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 88, product: 60, ce_ev: 10, role: quan, source: "Ester class"}
+      - {precursor: 88, product: 155, ce_ev: 5, role: qual, source: "Ester class"}
+
+  isoamyl-acetate:
+    name: isoamyl acetate (3-methylbutyl acetate)
+    class: ester
+    formula: C7H14O2
+    mw: 130.18
+    cas: "123-92-2"
+    rt: 9.0
+    column: DB-WAX
+    threshold: 30
+    threshold_units: µg/L
+    range_cabsauv: [3254, 14733]
+    range_units: µg/L
+    descriptor: "banana, pear"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 70, product: 43, ce_ev: 10, role: quan, source: "NIST + Hjelmeland"}
+      - {precursor: 87, product: 43, ce_ev: 5, role: qual, source: "NIST"}
+
+  hexyl-acetate:
+    name: hexyl acetate
+    class: ester
+    formula: C8H16O2
+    mw: 144.21
+    cas: "142-92-7"
+    rt: 12.5
+    column: DB-WAX
+    threshold: 670
+    threshold_units: µg/L
+    descriptor: "apple, pear, herbaceous"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 84, product: 43, ce_ev: 10, role: quan, source: "NIST; Lukić 2019"}
+      - {precursor: 84, product: 56, ce_ev: 10, role: qual, source: "NIST"}
+
+  ethyl-butanoate:
+    name: ethyl butanoate
+    class: ester
+    formula: C6H12O2
+    mw: 116.16
+    cas: "105-54-4"
+    rt: 7.0
+    column: DB-WAX
+    threshold: 20
+    threshold_units: µg/L
+    descriptor: "pineapple, strawberry"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 88, product: 60, ce_ev: 10, role: quan, source: "NIST"}
+      - {precursor: 88, product: 71, ce_ev: 10, role: qual, source: "NIST"}
+
+  2-phenethyl-acetate:
+    name: 2-phenethyl acetate
+    class: ester
+    formula: C10H12O2
+    mw: 164.20
+    cas: "103-45-7"
+    rt: 28.0
+    column: DB-WAX
+    threshold: 250
+    threshold_units: µg/L
+    descriptor: "rose, honey, fruity"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 104, product: 91, ce_ev: 10, role: quan, source: "NIST"}
+      - {precursor: 104, product: 105, ce_ev: 5, role: qual, source: "NIST"}
+
+  # ========== HIGHER ALCOHOLS ==========
+
+  2-phenylethanol:
+    name: 2-phenylethanol (phenethyl alcohol)
+    class: higher_alcohol
+    formula: C8H10O
+    mw: 122.17
+    cas: "60-12-8"
+    rt: 25.0
+    column: DB-WAX
+    threshold: 14000
+    threshold_units: µg/L
+    descriptor: "rose, honey"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 91, product: 65, ce_ev: 15, role: quan, source: "NIST; Razaq 2023"}
+      - {precursor: 122, product: 91, ce_ev: 10, role: qual, source: "NIST"}
+
+  # ========== EARTHY / MUSTY OFF-FLAVORS ==========
+
+  geosmin:
+    name: geosmin
+    class: musty
+    formula: C12H22O
+    mw: 182.30
+    cas: "19700-21-1"
+    rt: 24.0
+    column: DB-WAX
+    threshold: 10
+    threshold_units: ng/L
+    descriptor: "earthy, beetroot, damp cellar"
+    marker_type: fault
+    derivatization: none
+    transitions:
+      - {precursor: 112, product: 97, ce_ev: 10, role: quan, source: "Agilent 5991-1031EN"}
+      - {precursor: 182, product: 112, ce_ev: 10, role: qual, source: "Agilent 5991-1031EN"}
+
+  2-MIB:
+    name: 2-methylisoborneol
+    class: musty
+    formula: C11H20O
+    mw: 168.28
+    cas: "2371-42-8"
+    rt: 20.0
+    column: DB-WAX
+    threshold: 30
+    threshold_units: ng/L
+    descriptor: "musty, earthy"
+    marker_type: fault
+    derivatization: none
+    transitions:
+      - {precursor: 95, product: 67, ce_ev: 15, role: quan, source: "Agilent 5991-1031EN"}
+      - {precursor: 108, product: 95, ce_ev: 5, role: qual, source: "Agilent 5991-1031EN"}
+
+  # ========== SULFUR VOLATILES ==========
+
+  DMS:
+    name: dimethyl sulfide
+    class: sulfur
+    formula: C2H6S
+    mw: 62.13
+    cas: "75-18-3"
+    rt: 3.5
+    column: DB-WAX
+    threshold: 25
+    threshold_units: µg/L
+    threshold_note: "Cab Sauv dual-role: positive blackcurrant booster 10-30 µg/L; fault >60 µg/L"
+    range_cabsauv: [10, 200]
+    range_units: µg/L
+    descriptor: "blackcurrant, truffle (low); cabbage, asparagus (high)"
+    marker_type: fermentation
+    derivatization: none
+    transitions:
+      - {precursor: 62, product: 47, ce_ev: 10, role: quan, source: "Razaq 2023; Cucchiella 2024"}
+      - {precursor: 62, product: 45, ce_ev: 15, role: qual, source: "Cucchiella 2024"}
+
+  DMDS:
+    name: dimethyl disulfide
+    class: sulfur
+    formula: C2H6S2
+    mw: 94.20
+    cas: "624-92-0"
+    rt: 7.5
+    column: DB-WAX
+    threshold: 29
+    threshold_units: µg/L
+    descriptor: "cooked vegetable, garlic"
+    marker_type: fault
+    derivatization: none
+    transitions:
+      - {precursor: 94, product: 79, ce_ev: 10, role: quan, source: "Cucchiella 2024"}
+      - {precursor: 94, product: 45, ce_ev: 15, role: qual, source: "Cucchiella 2024"}
+
+  3MH:
+    name: 3-mercaptohexan-1-ol
+    class: sulfur
+    formula: C6H14OS
+    mw: 134.24
+    cas: "51755-83-0"
+    rt: 15.0
+    column: DB-WAX
+    threshold: 60
+    threshold_units: ng/L
+    range_cabsauv: [50, 875]
+    range_units: ng/L
+    descriptor: "passionfruit, grapefruit, blackcurrant bud"
+    marker_type: varietal
+    derivatization: PFB-extractive-alkylation
+    derivatization_note: "Native EI signal poor; PFB-extractive-alkylation gives NCI MRM at ng/L LOD; DTDP-LC-MS/MS is community alternative"
+    internal_standard: d2-3MH
+    transitions:
+      - {precursor: 134, product: 100, ce_ev: 5, role: quan, source: "Mateo-Vivaracho 2008/2010"}
+      - {precursor: 134, product: 67, ce_ev: 10, role: qual, source: "Mateo-Vivaracho"}
+
+  # ========== ALDEHYDES (PFBHA-derivatized) ==========
+
+  hexanal-PFBHA:
+    name: hexanal (PFBHA oxime)
+    class: aldehyde
+    formula: C13H12F5NO2  # PFBHA-derivatized
+    mw: 309.24
+    cas: "66-25-1"
+    rt: 37.2
+    column: DB-5
+    threshold: 5
+    threshold_units: µg/L
+    range_cabsauv: [10, 21]
+    range_units: µg/L
+    descriptor: "grassy, leafy, fresh-cut grass"
+    marker_type: oxidative
+    derivatization: PFBHA
+    transitions:
+      - {precursor: 181, product: 161, ce_ev: 15, role: quan, source: "Razaq 2023 JAFC"}
+      - {precursor: 239, product: 181, ce_ev: 15, role: qual, source: "Razaq 2023"}
+
+  methional-PFBHA:
+    name: methional (PFBHA oxime)
+    class: aldehyde
+    formula: C11H10F5NO2S
+    mw: 315.27
+    cas: "3268-49-3"
+    rt: 43.6
+    column: DB-5
+    threshold: 0.5
+    threshold_units: µg/L
+    descriptor: "boiled potato, cooked vegetable"
+    marker_type: oxidative
+    derivatization: PFBHA
+    transitions:
+      - {precursor: 252, product: 181, ce_ev: 10, role: quan, source: "Razaq 2023"}
+
+  phenylacetaldehyde-PFBHA:
+    name: phenylacetaldehyde (PFBHA oxime)
+    class: aldehyde
+    formula: C15H10F5NO2
+    mw: 331.24
+    cas: "122-78-1"
+    rt: 49.8
+    column: DB-5
+    threshold: 1
+    threshold_units: µg/L
+    descriptor: "hyacinth, hawthorn (Maderized at high levels)"
+    marker_type: oxidative
+    derivatization: PFBHA
+    transitions:
+      - {precursor: 181, product: 161, ce_ev: 5, role: quan, source: "Razaq 2023"}
+      - {precursor: 91, product: 65, ce_ev: 15, role: qual, source: "Razaq 2023"}
+
+  # ========== OXIDATIVE / AGING MARKERS ==========
+
+  sotolon:
+    name: sotolon (3-hydroxy-4,5-dimethyl-2(5H)-furanone)
+    class: oxidative
+    formula: C6H8O3
+    mw: 128.13
+    cas: "28664-35-9"
+    rt: 30.0
+    column: DB-WAX
+    threshold: 8
+    threshold_units: µg/L
+    descriptor: "curry, fenugreek, walnut (Madeira marker)"
+    marker_type: oxidative
+    derivatization: none
+    note: "LC-MS/MS often preferred over GC; included for completeness"
+    transitions:
+      - {precursor: 129, product: 55, ce_ev: 15, role: quan, source: "Foods 2019 PMC6311786"}
+      - {precursor: 129, product: 83, ce_ev: 15, role: qual, source: "Foods 2019"}
