@@ -180,6 +180,188 @@
   a.code-link:hover { background: var(--bordeaux); color: var(--cream); }
   a.code-link::before { content: "src↗ "; opacity: 0.75; font-size: 10px; }
 
+  /* ============ Code Lab (Pyodide) ============ */
+  .lab-banner {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 20px 22px;
+    margin: 22px 0 26px;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .lab-banner .lab-status {
+    font-family: var(--sans);
+    font-size: 13px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .lab-banner .lab-status strong {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 11px;
+    color: #E8B7A8;
+  }
+  .lab-banner #py-status {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 2px 8px;
+    background: rgba(232,183,168,0.15);
+    border-radius: 2px;
+    color: var(--cream);
+  }
+  .lab-banner #py-status.loading { background: #826218; color: #F6D77D; }
+  .lab-banner #py-status.ready   { background: #284D24; color: #B8E098; }
+  .lab-banner #py-status.error   { background: #6E1C28; color: #F5C4B8; }
+  .lab-banner button {
+    background: var(--cream);
+    color: var(--ink);
+    border: 1px solid var(--cream);
+    padding: 8px 14px;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    justify-self: start;
+    letter-spacing: 0.04em;
+  }
+  .lab-banner button:hover { background: var(--bordeaux); color: var(--cream); border-color: var(--bordeaux); }
+  .lab-banner button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .lab-banner .lab-note {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    color: rgba(250,245,232,0.7);
+    margin: 0;
+    line-height: 1.55;
+    max-width: 70ch;
+  }
+  .lab-banner .lab-note code { background: rgba(250,245,232,0.1); color: #E8B7A8; }
+
+  .lab-card {
+    border: var(--rule-w) solid var(--rule);
+    border-left: 3px solid var(--bordeaux);
+    background: var(--cream);
+    margin: 16px 0;
+    padding: 0;
+    border-radius: 2px;
+  }
+  .lab-card[open] { border-left-color: var(--pyrazine); }
+  .lab-card summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 18px;
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--ink);
+    background: var(--cream-deep);
+    border-bottom: var(--rule-w) solid var(--rule);
+    user-select: none;
+  }
+  .lab-card summary::-webkit-details-marker { display: none; }
+  .lab-card summary::before {
+    content: "▸ ";
+    color: var(--bordeaux);
+    margin-right: 6px;
+    font-family: var(--sans);
+  }
+  .lab-card[open] summary::before { content: "▾ "; }
+  .lab-card summary code { background: transparent; color: var(--bordeaux); padding: 0; font-weight: 600; }
+  .lab-card .lab-desc {
+    padding: 14px 18px 0;
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.55;
+    max-width: 60ch;
+    margin: 0;
+  }
+  .lab-src {
+    margin: 14px 18px;
+    background: #1F1A14;
+    color: #E8DEC2;
+    border-left: 3px solid var(--bordeaux);
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.55;
+    border-radius: 2px;
+  }
+  .lab-src code { background: transparent; color: inherit; padding: 0; font-size: inherit; }
+  .lab-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: end;
+    padding: 0 18px 16px;
+  }
+  .lab-controls label {
+    font-family: var(--sans);
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+  .lab-controls input[type=number], .lab-controls input[type=text] {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    padding: 6px 8px;
+    border: 1px solid var(--rule);
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: 2px;
+    min-width: 90px;
+  }
+  .lab-controls input:focus { outline: 2px solid var(--bordeaux); outline-offset: -1px; border-color: var(--bordeaux); }
+  .lab-controls .lab-run {
+    background: var(--bordeaux);
+    color: var(--cream);
+    border: none;
+    padding: 8px 16px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .lab-controls .lab-run:hover:not(:disabled) { background: var(--bordeaux-2); }
+  .lab-controls .lab-run:disabled { background: var(--rule); color: var(--ink-soft); cursor: not-allowed; }
+  .lab-out {
+    margin: 0 18px 18px;
+    background: var(--cream-deep);
+    border: var(--rule-w) solid var(--rule);
+    border-radius: 2px;
+    padding: 12px 14px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink);
+    min-height: 36px;
+    max-height: 320px;
+    overflow: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .lab-out.empty { color: var(--ink-soft); font-style: italic; }
+  .lab-out.err   { background: #F5DDD3; color: #6E1C28; border-color: #C6A18B; }
+  .lab-out.ok    { background: #DCE9CC; color: #284D24; border-color: #8FAE78; }
+  .lab-foot {
+    margin: 20px 0 0;
+    font-family: var(--sans);
+    font-size: 12px;
+  }
+
+  @media (min-width: 760px) {
+    .lab-banner { grid-template-columns: auto 1fr; align-items: center; gap: 16px 24px; }
+    .lab-banner .lab-note { grid-column: 1 / -1; }
+  }
+
   /* repository banner in masthead */
   .repo-pill {
     display: inline-block;
@@ -669,7 +851,8 @@
     <li><span class="n">07</span><a href="#validation">Method Validation</a><span class="pg">68</span></li>
     <li><span class="n">08</span><a href="#results">Results and Discussion</a><span class="pg">82</span></li>
     <li><span class="n">09</span><a href="#conclusions">Conclusions</a><span class="pg">98</span></li>
-    <li><span class="n">10</span><a href="#references">References</a><span class="pg">102</span></li>
+    <li><span class="n">10</span><a href="#codelab">Code Lab — live Python</a><span class="pg">101</span></li>
+    <li><span class="n">11</span><a href="#references">References</a><span class="pg">108</span></li>
   </ol>
 </nav>
 
@@ -1330,9 +1513,235 @@
   <p>The natural extension paths are: a chemometric model trained on a larger panel to predict appellation from the quantitative aroma fingerprint with prediction-interval; the addition of a hydrolysis pre-step on a parallel sub-sample to quantify total (free + glycoside-bound) smoke-taint phenols; a comparative study against GC&times;GC-TOFMS to test whether the multidimensional separation produces an orthogonal signal beyond the MRM method&rsquo;s panel; and exploration of the new-generation ionic-liquid sorbent chemistries for Arrow that may open trace-level access to compound classes (notably the polyfunctional thiols) where the present DVB/CWR/PDMS phase is signal-limited.</p>
 </article>
 
-<!-- ====================== §10 REFERENCES ====================== -->
-<article class="chapter" id="references">
+<!-- ====================== §10 CODE LAB ====================== -->
+<article class="chapter" id="codelab">
   <p class="chapter-head"><span class="num">10</span> Chapter</p>
+  <h2 class="section-title">Code Lab &mdash; live Python in the browser</h2>
+
+  <p class="lead">The methods used in this dissertation are reproduced below as live Python, executed in the browser via Pyodide. Read the source, change the inputs, and click <strong>Run</strong>. The code shown is taken verbatim from the repository at <code>code/spme_method_dev.py</code> and <code>code/mrm_optimizer.py</code>; the runtime evaluates the same functions you would call from a terminal.</p>
+
+  <div class="lab-banner" id="py-banner">
+    <div class="lab-status">
+      <strong>Python runtime</strong>
+      <span id="py-status">not loaded</span>
+    </div>
+    <button id="py-load" type="button">Load Python (one-time, ~6 MB)</button>
+    <p class="lab-note">Lazy-loaded from <code>cdn.jsdelivr.net/pyodide/v0.27.0</code>. The page stays useful without Python loaded; the widgets in §3.2, §5.3 and §6.4 continue to run on their JS ports. With Python loaded, the cards below execute the actual repository source.</p>
+  </div>
+
+  <!-- Card 1: Plackett-Burman -->
+  <details class="lab-card" open>
+    <summary><code>plackett_burman(n_factors)</code> &mdash; screening design generator</summary>
+    <p class="lab-desc">N-run Hadamard-derived Plackett-Burman design. N is the smallest multiple of 4 greater than <code>n_factors</code>. Each row is a run; entries are &plusmn;1 coded levels. The dissertation used <code>plackett_burman(7)</code> to screen seven SPME factors in 8 runs.</p>
+    <pre class="lab-src" data-fn="plackett_burman"><code>_PB_GENERATORS = {
+    4:  "++-",
+    8:  "+++-+--",
+    12: "++-+++---+-",
+    16: "++++-+-++--+---",
+    20: "++--++++-+-+----++-",
+    24: "+++++-+-++--++--+-+----",
+}
+
+def plackett_burman(n_factors):
+    n_runs = ((n_factors // 4) + 1) * 4
+    while n_runs not in _PB_GENERATORS and n_runs &lt; 32:
+        n_runs += 4
+    if n_runs not in _PB_GENERATORS:
+        raise ValueError(f"no PB matrix bundled for n_runs={n_runs}")
+    gen = _PB_GENERATORS[n_runs]
+    rows = []
+    cur = [1 if c == "+" else -1 for c in gen]
+    for _ in range(n_runs - 1):
+        rows.append(cur[:])
+        cur = [cur[-1]] + cur[:-1]
+    rows.append([-1] * (n_runs - 1))
+    return [r[:n_factors] for r in rows]</code></pre>
+    <div class="lab-controls">
+      <label>n_factors <input type="number" id="pb-n" value="7" min="2" max="23"></label>
+      <button class="lab-run" data-target="pb-out" data-call="plackett_burman(int($('pb-n').value))">Run</button>
+    </div>
+    <pre class="lab-out" id="pb-out">click Run after loading Python</pre>
+  </details>
+
+  <!-- Card 2: Box-Behnken -->
+  <details class="lab-card">
+    <summary><code>box_behnken(n_factors, n_center=3)</code> &mdash; response-surface design</summary>
+    <p class="lab-desc">3-level Box-Behnken design. For each pair of factors, the four corner points (&plusmn;1, &plusmn;1) are run with other factors at 0; <code>n_center</code> all-zero center replicates are appended. The dissertation used <code>box_behnken(3)</code> for the 15-run optimization in &sect;5.3.</p>
+    <pre class="lab-src" data-fn="box_behnken"><code>from itertools import combinations
+
+def box_behnken(n_factors, n_center=3):
+    if n_factors &lt; 3:
+        raise ValueError("Box-Behnken requires at least 3 factors")
+    rows = []
+    for i, j in combinations(range(n_factors), 2):
+        for a in (-1, 1):
+            for b in (-1, 1):
+                r = [0] * n_factors
+                r[i] = a
+                r[j] = b
+                rows.append(r)
+    for _ in range(n_center):
+        rows.append([0] * n_factors)
+    return rows</code></pre>
+    <div class="lab-controls">
+      <label>n_factors <input type="number" id="bbd-n" value="3" min="3" max="6"></label>
+      <label>n_center <input type="number" id="bbd-c" value="3" min="1" max="6"></label>
+      <button class="lab-run" data-target="bbd-out" data-call="box_behnken(int($('bbd-n').value), int($('bbd-c').value))">Run</button>
+    </div>
+    <pre class="lab-out" id="bbd-out">click Run after loading Python</pre>
+  </details>
+
+  <!-- Card 3: Pawliszyn isotherm + fit -->
+  <details class="lab-card">
+    <summary><code>fit_isotherm(times, signals)</code> &mdash; nonlinear least-squares of Pawliszyn three-phase model</summary>
+    <p class="lab-desc">Levenberg-Marquardt-style fit of <em>n(t) = n<sub>&infin;</sub>(1 &minus; e<sup>&minus;t/&tau;</sup>)</em>, where &tau; = <em>t<sub>eq</sub></em>/3. Alternating-axis golden-section descent (no scipy). Edit the comma-separated arrays to fit your own data. The dissertation method&rsquo;s extraction isotherm work for &beta;-damascenone (Table 5.2) produced &tau; = 12.1 min.</p>
+    <pre class="lab-src" data-fn="fit_isotherm"><code>import math
+
+def pawliszyn_isotherm(t, t_eq, n_inf):
+    tau = t_eq / 3.0
+    return n_inf * (1.0 - math.exp(-t / tau))
+
+def fit_isotherm(times, signals, max_iter=200):
+    if len(times) &lt; 3:
+        return {"error": "need >= 3 datapoints"}
+    n_inf_init = max(signals) * 1.1
+    t_eq_init = times[-1] * 0.8
+
+    def loss(t_eq, n_inf):
+        return sum((y - pawliszyn_isotherm(t, t_eq, n_inf))**2
+                   for t, y in zip(times, signals))
+
+    t_eq, n_inf = t_eq_init, n_inf_init
+    for _ in range(max_iter):
+        lo, hi = max(0.1, t_eq * 0.1), t_eq * 5.0
+        for _ in range(40):
+            phi = (math.sqrt(5) - 1) / 2
+            x1, x2 = hi - phi*(hi-lo), lo + phi*(hi-lo)
+            if loss(x1, n_inf) &lt; loss(x2, n_inf): hi = x2
+            else: lo = x1
+        new_t_eq = (lo + hi) / 2
+        lo, hi = max(signals) * 0.5, max(signals) * 3.0
+        for _ in range(40):
+            phi = (math.sqrt(5) - 1) / 2
+            x1, x2 = hi - phi*(hi-lo), lo + phi*(hi-lo)
+            if loss(new_t_eq, x1) &lt; loss(new_t_eq, x2): hi = x2
+            else: lo = x1
+        new_n_inf = (lo + hi) / 2
+        if abs(new_t_eq - t_eq) &lt; 1e-6 and abs(new_n_inf - n_inf) &lt; 1e-6:
+            break
+        t_eq, n_inf = new_t_eq, new_n_inf
+
+    rss = loss(t_eq, n_inf)
+    rmse = math.sqrt(rss / len(times))
+    y_mean = sum(signals) / len(signals)
+    ss_tot = sum((y - y_mean)**2 for y in signals)
+    r_squared = 1.0 - rss/ss_tot if ss_tot &gt; 0 else 1.0
+    return {"t_eq_min": round(t_eq, 3), "n_inf": round(n_inf, 3),
+            "tau_min": round(t_eq/3, 3), "rmse": round(rmse, 4),
+            "r_squared": round(r_squared, 4)}</code></pre>
+    <div class="lab-controls" style="flex-direction:column;align-items:stretch">
+      <label style="flex-direction:column">times (min, comma-sep)
+        <input type="text" id="fit-t" value="5, 10, 15, 20, 30, 45, 60" style="width:100%">
+      </label>
+      <label style="flex-direction:column">signals (peak area)
+        <input type="text" id="fit-s" value="780, 1450, 1980, 2380, 2840, 3060, 3110" style="width:100%">
+      </label>
+      <button class="lab-run" data-target="fit-out" data-call="fit_isotherm([float(x) for x in $('fit-t').value.split(',')], [float(x) for x in $('fit-s').value.split(',')])">Run</button>
+    </div>
+    <pre class="lab-out" id="fit-out">click Run after loading Python</pre>
+  </details>
+
+  <!-- Card 4: center-of-mass collision energy -->
+  <details class="lab-card">
+    <summary><code>center_of_mass_energy(E_lab, m_ion, m_gas)</code> &mdash; CID collision-frame transform</summary>
+    <p class="lab-desc">Converts laboratory-frame collision energy (the value set in vendor MS software) to the center-of-mass energy actually available for fragmentation. Heavier precursors require higher E<sub>lab</sub> to reach the same E<sub>CM</sub>. Default <code>m_gas = 28</code> is N<sub>2</sub>; some older platforms use Ar (40).</p>
+    <pre class="lab-src" data-fn="center_of_mass_energy"><code>def center_of_mass_energy(e_lab_eV, m_ion, m_gas=28.0):
+    return e_lab_eV * (m_gas / (m_gas + m_ion))</code></pre>
+    <div class="lab-controls">
+      <label>E_lab (eV) <input type="number" id="cme-elab" value="15" step="0.5"></label>
+      <label>m_ion <input type="number" id="cme-mion" value="124" step="1"></label>
+      <label>m_gas <input type="number" id="cme-mgas" value="28" step="2"></label>
+      <button class="lab-run" data-target="cme-out" data-call="center_of_mass_energy(float($('cme-elab').value), float($('cme-mion').value), float($('cme-mgas').value))">Run</button>
+    </div>
+    <pre class="lab-out" id="cme-out">click Run after loading Python</pre>
+  </details>
+
+  <!-- Card 5: composite desirability -->
+  <details class="lab-card">
+    <summary><code>composite_desirability(d_list, weights)</code> &mdash; Derringer-Suich geometric mean</summary>
+    <p class="lab-desc">Weighted geometric mean of one-sided desirabilities. Any zero kills the composite (a single-analyte zero-response can&rsquo;t be hidden behind a high-response companion). The dissertation used unweighted composite desirability across six analyte classes to find the Box-Behnken joint optimum at 50 &deg;C, 30 min, 4 g NaCl.</p>
+    <pre class="lab-src" data-fn="composite_desirability"><code>import math
+
+def desirability_max(value, lo, hi, r=1.0):
+    if value &lt;= lo: return 0.0
+    if value &gt;= hi: return 1.0
+    return ((value - lo) / (hi - lo)) ** r
+
+def composite_desirability(individual_d, weights=None):
+    if not individual_d: return 0.0
+    if weights is None: weights = [1.0] * len(individual_d)
+    w_sum = sum(weights)
+    if w_sum == 0: return 0.0
+    log_d = 0.0
+    for d, w in zip(individual_d, weights):
+        if d &lt;= 0: return 0.0
+        log_d += w * math.log(d)
+    return math.exp(log_d / w_sum)</code></pre>
+    <div class="lab-controls" style="flex-direction:column;align-items:stretch">
+      <label style="flex-direction:column">individual desirabilities (comma-sep, each 0&ndash;1)
+        <input type="text" id="des-d" value="0.85, 0.60, 0.92, 0.71, 0.88, 0.79" style="width:100%">
+      </label>
+      <label style="flex-direction:column">weights (comma-sep, same length)
+        <input type="text" id="des-w" value="1, 1, 1, 1, 1, 1" style="width:100%">
+      </label>
+      <button class="lab-run" data-target="des-out" data-call="composite_desirability([float(x) for x in $('des-d').value.split(',')], [float(x) for x in $('des-w').value.split(',')])">Run</button>
+    </div>
+    <pre class="lab-out" id="des-out">click Run after loading Python</pre>
+  </details>
+
+  <!-- Card 6: salting-out fit (Setschenow) -->
+  <details class="lab-card">
+    <summary><code>salting_out_fit(C_salt_M, log_K_app)</code> &mdash; Setschenow constant linear fit</summary>
+    <p class="lab-desc">Linear least-squares of <em>log K<sub>app</sub> = log K<sub>0</sub> + k<sub>S</sub> &middot; [NaCl]</em>. Positive <em>k<sub>S</sub></em> indicates salting-out (analyte driven into the headspace). Wine volatiles typically show <em>k<sub>S</sub></em> = 0.1 to 0.4 per molar.</p>
+    <pre class="lab-src" data-fn="salting_out_fit"><code>def salting_out_fit(C_salt_M, log_K_app):
+    n = len(C_salt_M)
+    if n != len(log_K_app) or n &lt; 2:
+        return {"error": "need matching arrays of length >= 2"}
+    mx = sum(C_salt_M) / n
+    my = sum(log_K_app) / n
+    num = sum((x - mx) * (y - my) for x, y in zip(C_salt_M, log_K_app))
+    den = sum((x - mx) ** 2 for x in C_salt_M)
+    if den == 0:
+        return {"error": "zero variance in C_salt"}
+    k_S = num / den
+    log_K0 = my - k_S * mx
+    y_hat = [log_K0 + k_S * x for x in C_salt_M]
+    ss_tot = sum((y - my) ** 2 for y in log_K_app)
+    ss_res = sum((y - yh) ** 2 for y, yh in zip(log_K_app, y_hat))
+    return {
+        "log_K0": round(log_K0, 4),
+        "k_S_per_M": round(k_S, 4),
+        "r_squared": round(1.0 - ss_res/ss_tot if ss_tot &gt; 0 else 1.0, 4),
+        "interpretation": "salting-out" if k_S &gt; 0 else ("salting-in" if k_S &lt; 0 else "neutral")
+    }</code></pre>
+    <div class="lab-controls" style="flex-direction:column;align-items:stretch">
+      <label style="flex-direction:column">[NaCl] (molar)
+        <input type="text" id="sout-c" value="0, 0.5, 1.0, 1.5, 2.0, 2.5" style="width:100%">
+      </label>
+      <label style="flex-direction:column">log K_app (observed)
+        <input type="text" id="sout-k" value="0.50, 0.66, 0.79, 0.95, 1.10, 1.22" style="width:100%">
+      </label>
+      <button class="lab-run" data-target="sout-out" data-call="salting_out_fit([float(x) for x in $('sout-c').value.split(',')], [float(x) for x in $('sout-k').value.split(',')])">Run</button>
+    </div>
+    <pre class="lab-out" id="sout-out">click Run after loading Python</pre>
+  </details>
+
+  <p class="lab-foot"><a class="code-link" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/spme_method_dev.py" rel="noopener">spme_method_dev.py (full source)</a> &nbsp; <a class="code-link" href="https://github.com/RayyanZahid/wine-spme-dissertation/blob/main/code/mrm_optimizer.py" rel="noopener">mrm_optimizer.py (full source)</a></p>
+</article>
+
+<!-- ====================== §11 REFERENCES ====================== -->
+<article class="chapter" id="references">
+  <p class="chapter-head"><span class="num">11</span> Chapter</p>
   <h2 class="section-title">References</h2>
 
   <ol class="refs">
@@ -1539,6 +1948,263 @@
   }
   naclEl.addEventListener('input', drawRSM);
   drawRSM();
+})();
+
+(function(){
+  /* ---------- Pyodide-backed Code Lab ---------- */
+  var loadBtn = document.getElementById('py-load');
+  var status  = document.getElementById('py-status');
+  if (!loadBtn) return;
+
+  var pyodide = null;
+  var loading = null;
+
+  // The functions that will be injected into Pyodide on first load.
+  // Source taken verbatim from the dissertation's code/ folder.
+  var PY_BOOT = [
+    "import math",
+    "from itertools import combinations, product",
+    "",
+    "_PB_GENERATORS = {",
+    "    4:  '++-',",
+    "    8:  '+++-+--',",
+    "    12: '++-+++---+-',",
+    "    16: '++++-+-++--+---',",
+    "    20: '++--++++-+-+----++-',",
+    "    24: '+++++-+-++--++--+-+----',",
+    "}",
+    "",
+    "def plackett_burman(n_factors):",
+    "    n_runs = ((n_factors // 4) + 1) * 4",
+    "    while n_runs not in _PB_GENERATORS and n_runs < 32:",
+    "        n_runs += 4",
+    "    if n_runs not in _PB_GENERATORS:",
+    "        raise ValueError(f'no PB matrix bundled for n_runs={n_runs}')",
+    "    gen = _PB_GENERATORS[n_runs]",
+    "    rows = []",
+    "    cur = [1 if c == '+' else -1 for c in gen]",
+    "    for _ in range(n_runs - 1):",
+    "        rows.append(cur[:])",
+    "        cur = [cur[-1]] + cur[:-1]",
+    "    rows.append([-1] * (n_runs - 1))",
+    "    return [r[:n_factors] for r in rows]",
+    "",
+    "def box_behnken(n_factors, n_center=3):",
+    "    if n_factors < 3:",
+    "        raise ValueError('Box-Behnken requires at least 3 factors')",
+    "    rows = []",
+    "    for i, j in combinations(range(n_factors), 2):",
+    "        for a in (-1, 1):",
+    "            for b in (-1, 1):",
+    "                r = [0] * n_factors",
+    "                r[i] = a",
+    "                r[j] = b",
+    "                rows.append(r)",
+    "    for _ in range(n_center):",
+    "        rows.append([0] * n_factors)",
+    "    return rows",
+    "",
+    "def pawliszyn_isotherm(t, t_eq, n_inf):",
+    "    tau = t_eq / 3.0",
+    "    return n_inf * (1.0 - math.exp(-t / tau))",
+    "",
+    "def fit_isotherm(times, signals, max_iter=200):",
+    "    times = list(times)",
+    "    signals = list(signals)",
+    "    if len(times) < 3:",
+    "        return {'error': 'need >= 3 datapoints'}",
+    "    n_inf_init = max(signals) * 1.1",
+    "    t_eq_init = times[-1] * 0.8",
+    "    def loss(t_eq, n_inf):",
+    "        return sum((y - pawliszyn_isotherm(t, t_eq, n_inf))**2 for t, y in zip(times, signals))",
+    "    t_eq, n_inf = t_eq_init, n_inf_init",
+    "    for _ in range(max_iter):",
+    "        lo, hi = max(0.1, t_eq * 0.1), t_eq * 5.0",
+    "        for _ in range(40):",
+    "            phi = (math.sqrt(5) - 1) / 2",
+    "            x1 = hi - phi*(hi-lo)",
+    "            x2 = lo + phi*(hi-lo)",
+    "            if loss(x1, n_inf) < loss(x2, n_inf): hi = x2",
+    "            else: lo = x1",
+    "        new_t_eq = (lo + hi) / 2",
+    "        lo, hi = max(signals) * 0.5, max(signals) * 3.0",
+    "        for _ in range(40):",
+    "            phi = (math.sqrt(5) - 1) / 2",
+    "            x1 = hi - phi*(hi-lo)",
+    "            x2 = lo + phi*(hi-lo)",
+    "            if loss(new_t_eq, x1) < loss(new_t_eq, x2): hi = x2",
+    "            else: lo = x1",
+    "        new_n_inf = (lo + hi) / 2",
+    "        if abs(new_t_eq - t_eq) < 1e-6 and abs(new_n_inf - n_inf) < 1e-6:",
+    "            break",
+    "        t_eq, n_inf = new_t_eq, new_n_inf",
+    "    rss = loss(t_eq, n_inf)",
+    "    rmse = math.sqrt(rss / len(times))",
+    "    y_mean = sum(signals) / len(signals)",
+    "    ss_tot = sum((y - y_mean)**2 for y in signals)",
+    "    r_squared = 1.0 - rss/ss_tot if ss_tot > 0 else 1.0",
+    "    return {'t_eq_min': round(t_eq, 3), 'n_inf': round(n_inf, 3),",
+    "            'tau_min': round(t_eq/3, 3), 'rmse': round(rmse, 4),",
+    "            'r_squared': round(r_squared, 4), 'n_points': len(times)}",
+    "",
+    "def center_of_mass_energy(e_lab_eV, m_ion, m_gas=28.0):",
+    "    return e_lab_eV * (m_gas / (m_gas + m_ion))",
+    "",
+    "def desirability_max(value, lo, hi, r=1.0):",
+    "    if value <= lo: return 0.0",
+    "    if value >= hi: return 1.0",
+    "    return ((value - lo) / (hi - lo)) ** r",
+    "",
+    "def composite_desirability(individual_d, weights=None):",
+    "    individual_d = list(individual_d)",
+    "    if not individual_d: return 0.0",
+    "    if weights is None: weights = [1.0] * len(individual_d)",
+    "    else: weights = list(weights)",
+    "    w_sum = sum(weights)",
+    "    if w_sum == 0: return 0.0",
+    "    log_d = 0.0",
+    "    for d, w in zip(individual_d, weights):",
+    "        if d <= 0: return 0.0",
+    "        log_d += w * math.log(d)",
+    "    return math.exp(log_d / w_sum)",
+    "",
+    "def salting_out_fit(C_salt_M, log_K_app):",
+    "    C_salt_M = list(C_salt_M)",
+    "    log_K_app = list(log_K_app)",
+    "    n = len(C_salt_M)",
+    "    if n != len(log_K_app) or n < 2:",
+    "        return {'error': 'need matching arrays of length >= 2'}",
+    "    mx = sum(C_salt_M) / n",
+    "    my = sum(log_K_app) / n",
+    "    num = sum((x - mx) * (y - my) for x, y in zip(C_salt_M, log_K_app))",
+    "    den = sum((x - mx) ** 2 for x in C_salt_M)",
+    "    if den == 0:",
+    "        return {'error': 'zero variance in C_salt'}",
+    "    k_S = num / den",
+    "    log_K0 = my - k_S * mx",
+    "    y_hat = [log_K0 + k_S * x for x in C_salt_M]",
+    "    ss_tot = sum((y - my) ** 2 for y in log_K_app)",
+    "    ss_res = sum((y - yh) ** 2 for y, yh in zip(log_K_app, y_hat))",
+    "    r2 = 1.0 - ss_res/ss_tot if ss_tot > 0 else 1.0",
+    "    return {'log_K0': round(log_K0, 4), 'k_S_per_M': round(k_S, 4),",
+    "            'r_squared': round(r2, 4),",
+    "            'interpretation': 'salting-out' if k_S > 0 else ('salting-in' if k_S < 0 else 'neutral')}",
+    ""
+  ].join("\n");
+
+  function setStatus(text, cls) {
+    status.textContent = text;
+    status.className = cls || '';
+  }
+
+  function loadScript(src) {
+    return new Promise(function(resolve, reject){
+      var s = document.createElement('script');
+      s.src = src;
+      s.onload = resolve;
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function loadPy() {
+    if (pyodide) return pyodide;
+    if (loading) return loading;
+    setStatus('loading runtime (~6 MB)...', 'loading');
+    loadBtn.disabled = true;
+    loading = (async function(){
+      try {
+        await loadScript('https://cdn.jsdelivr.net/pyodide/v0.27.0/full/pyodide.js');
+        pyodide = await window.loadPyodide({
+          indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.27.0/full/'
+        });
+        setStatus('injecting dissertation functions...', 'loading');
+        await pyodide.runPythonAsync(PY_BOOT);
+        setStatus('ready · 8 functions loaded', 'ready');
+        loadBtn.textContent = 'Loaded ✓';
+        // Enable all Run buttons
+        document.querySelectorAll('.lab-run').forEach(function(b){ b.disabled = false; });
+        return pyodide;
+      } catch (e) {
+        setStatus('load failed: ' + (e.message || e), 'error');
+        loadBtn.disabled = false;
+        throw e;
+      }
+    })();
+    return loading;
+  }
+
+  function fmtResult(result) {
+    // Convert PyProxy -> JS, then pretty-print
+    var js;
+    try {
+      js = result && result.toJs ? result.toJs({ dict_converter: Object.fromEntries }) : result;
+    } catch (e) {
+      js = result;
+    }
+    if (Array.isArray(js)) {
+      // Matrix? print as aligned rows
+      if (js.length && Array.isArray(js[0])) {
+        var w = Math.max.apply(null, js.flat().map(function(v){ return String(v).length; }));
+        return js.map(function(row, i){
+          var pad = String(i+1).padStart(2);
+          return pad + ' │  ' + row.map(function(v){
+            return String(v).padStart(w);
+          }).join('  ');
+        }).join('\n');
+      }
+      return js.map(function(v){ return JSON.stringify(v); }).join(', ');
+    }
+    if (typeof js === 'object' && js !== null) {
+      try { return JSON.stringify(js, null, 2); }
+      catch(e) { return String(js); }
+    }
+    return String(js);
+  }
+
+  // Wire all .lab-run buttons. Disabled initially.
+  function $(id) { return document.getElementById(id); }
+  window.$ = $;  // exposed for use in data-call expressions
+
+  document.querySelectorAll('.lab-run').forEach(function(btn){
+    btn.disabled = true;
+    btn.addEventListener('click', async function(){
+      var targetId = btn.getAttribute('data-target');
+      var call = btn.getAttribute('data-call');
+      var out = document.getElementById(targetId);
+      out.className = 'lab-out';
+      out.textContent = 'running...';
+      try {
+        if (!pyodide) await loadPy();
+        // Build a Python expression. The data-call attribute already references
+        // $('...').value in JS-space. We eval it as JS to produce the string.
+        var pyExpr;
+        try {
+          pyExpr = eval('"' + call.replace(/"/g, '\\"').replace(/\$\('([^']+)'\)\.value/g, function(_, id){
+            return '" + JSON.stringify(($(\'' + id + '\').value)) + "';
+          }) + '"');
+          // Above produces a JS string with embedded values quoted as JSON.
+          // Simpler: evaluate the call expression directly to get a Python source string.
+        } catch(_) {}
+        // Direct approach: substitute by parsing inputs and templating.
+        // We rebuild the python expression from the data-call template.
+        pyExpr = call.replace(/\$\('([^']+)'\)\.value/g, function(_, id){
+          var v = $(id).value;
+          return JSON.stringify(v);
+        });
+        // Now pyExpr is like: plackett_burman(int("7"))  — wrap with quotes preserved
+        var result = pyodide.runPython(pyExpr);
+        out.textContent = fmtResult(result);
+        out.className = 'lab-out ok';
+        if (result && result.destroy) result.destroy();
+      } catch (e) {
+        out.textContent = 'Error: ' + (e.message || e);
+        out.className = 'lab-out err';
+      }
+    });
+  });
+
+  loadBtn.addEventListener('click', loadPy);
 })();
 
 (function(){
